@@ -11,20 +11,13 @@ import java.util.concurrent.TimeUnit
 class RetrofitFactory private constructor(){
 
     companion object {
-        val sIntanace: RetrofitFactory by lazy{ RetrofitFactory() }
+        val sInstance: RetrofitFactory by lazy{ RetrofitFactory() }
     }
 
     private val mRetrofit: Retrofit
     private val mInterceptor: Interceptor
 
     init {
-        mRetrofit = Retrofit.Builder()
-                .baseUrl(NetConstant.HOST)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .client(initClient())
-                .build()
-
         mInterceptor = Interceptor{chain ->
             chain.request()
                     .newBuilder()
@@ -35,6 +28,15 @@ class RetrofitFactory private constructor(){
                         chain.proceed(it)
                     }
         }
+
+        mRetrofit = Retrofit.Builder()
+                .baseUrl(NetConstant.HOST)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .client(initClient())
+                .build()
+
+
     }
 
     private fun initClient(): OkHttpClient {

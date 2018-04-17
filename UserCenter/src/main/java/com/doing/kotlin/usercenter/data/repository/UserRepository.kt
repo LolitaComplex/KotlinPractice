@@ -7,7 +7,7 @@ class UserRepository private constructor(){
 
     companion object {
         fun getUserApi(): UserApi {
-            return RetrofitFactory.sIntanace.create(UserApi::class.java)
+            return RetrofitFactory.sInstance.create(UserApi::class.java)
         }
     }
 }
