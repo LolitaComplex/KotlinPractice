@@ -1,10 +1,9 @@
 package com.doing.kotlin.usercenter.ui.activity
 
-import android.os.Bundle
 import android.view.View
-import com.doing.kotlin.baselib.common.ext.getTrimText
-import com.doing.kotlin.baselib.common.ui.activity.BaseMvpActivity
-import com.doing.kotlin.baselib.common.utils.toast
+import com.doing.kotlin.baselib.ext.getTrimText
+import com.doing.kotlin.baselib.ui.activity.BaseMvpActivity
+import com.doing.kotlin.baselib.utils.toast
 import com.doing.kotlin.usercenter.R
 import com.doing.kotlin.usercenter.injection.component.DaggerUserComponent
 import com.doing.kotlin.usercenter.injection.module.UserModule
@@ -17,15 +16,23 @@ import java.util.*
 
 class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView, View.OnClickListener {
 
+
     companion object {
         const val KEY = "key"
         const val VALUE = "Value"
+        private const val TAG = "RegisterActivity"
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
+    override fun getLayoutId(): Int {
+        return R.layout.activity_register
+    }
 
+    override fun initView() {
+        mBtnGetCode.setOnClickListener(this)
+        mBtnRegister.setOnClickListener(this)
+    }
+
+    override fun injection() {
         DaggerUserComponent.builder()
                 .activityComponent(mActivityComponent)
                 .userModule(UserModule())
@@ -33,9 +40,6 @@ class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView, Vie
                 .inject(this)
 
         mPresenter.mView = this
-
-        mBtnGetCode.setOnClickListener(this)
-        mBtnRegister.setOnClickListener(this)
     }
 
     override fun onRegisterResult(result: Boolean) {

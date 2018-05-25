@@ -1,9 +1,8 @@
 package com.doing.kotlin.usercenter.data.api
 
-import com.doing.kotlin.baselib.common.data.protocal.BaseResponse
+import com.doing.kotlin.baselib.data.protocal.BaseResponse
 import com.doing.kotlin.usercenter.data.protocal.RegisterReq
 import retrofit2.http.Body
-import retrofit2.http.Field
 import retrofit2.http.POST
 import rx.Observable
 

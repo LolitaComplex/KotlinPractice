@@ -6,7 +6,7 @@ import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import android.view.Gravity
 import android.view.ViewGroup
-import com.doing.kotlin.baselib.common.utils.toast
+import com.doing.kotlin.baselib.utils.toast
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
 

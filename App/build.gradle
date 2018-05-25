@@ -24,6 +24,11 @@ android {
         }
     }
 
+    lintOptions {
+        disable 'GoogleAppIndexingWarning'
+        baseline file("lint-baseline.xml")
+    }
+
 }
 
 dependencies {

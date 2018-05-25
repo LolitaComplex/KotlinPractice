@@ -1,6 +1,6 @@
 package com.doing.kotlin.usercenter.precenter.view
 
-import com.doing.kotlin.baselib.common.presenter.view.BaseView
+import com.doing.kotlin.baselib.presenter.view.BaseView
 
 interface RegisterView : BaseView {
 

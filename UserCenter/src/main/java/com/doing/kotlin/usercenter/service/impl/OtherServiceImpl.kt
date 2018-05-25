@@ -1,27 +1,19 @@
-package com.doing.kotlin.usercenter.service
+package com.doing.kotlin.usercenter.service.impl
 
-import android.content.Context
-import android.util.Log
 import com.doing.kotlin.baselib.data.rx.BaseException
 import com.doing.kotlin.usercenter.data.protocal.RegisterReq
 import com.doing.kotlin.usercenter.data.repository.UserRepository
-import com.doing.kotlin.usercenter.service.impl.UserService
 import rx.Observable
 import javax.inject.Inject
 
-class UserServiceImpl @Inject constructor(): UserService {
-
-    @Inject
-    lateinit var mContext: Context
+class OtherServiceImpl @Inject constructor(): UserService {
 
     override fun register(mobile: String, pwd: String, verifyCode: String): Observable<Boolean> {
-
-        Log.d("UserServiceImpl", mContext.toString())
 
         return UserRepository.getUserApi().register(RegisterReq(mobile, pwd, verifyCode))
                 .flatMap {
                     if (it.status == 0) {
-                        Observable.just(true)
+                        Observable.just(false)
                     } else {
                         Observable.error(BaseException(it.status, it.message))
                     }
