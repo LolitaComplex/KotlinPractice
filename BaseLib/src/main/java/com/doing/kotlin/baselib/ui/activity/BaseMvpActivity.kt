@@ -3,7 +3,6 @@ package com.doing.kotlin.baselib.ui.activity
 import android.content.Context
 import android.os.Bundle
 import android.support.annotation.LayoutRes
-import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
 import com.doing.kotlin.baselib.common.BaseApplication
@@ -13,6 +12,7 @@ import com.doing.kotlin.baselib.injection.module.ActivityModule
 import com.doing.kotlin.baselib.injection.module.LifecycleProviderModule
 import com.doing.kotlin.baselib.presenter.BasePresenter
 import com.doing.kotlin.baselib.presenter.view.BaseView
+import com.doing.kotlin.baselib.ui.widget.GeneralToolbar
 import javax.inject.Inject
 
 abstract class BaseMvpActivity<T: BasePresenter<*>> : BaseActivity(), BaseView {
@@ -25,7 +25,11 @@ abstract class BaseMvpActivity<T: BasePresenter<*>> : BaseActivity(), BaseView {
     protected lateinit var mContext: Context
 
     // ============== 通用成员 ==================
-    protected lateinit var mToolbar: Toolbar
+    protected lateinit var mToolbar: GeneralToolbar
+    protected var mMenuClick: MenuClick? = null
+    protected val mMenuList: List<MenuItem> by lazy {
+        ArrayList<MenuItem>()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,22 +45,21 @@ abstract class BaseMvpActivity<T: BasePresenter<*>> : BaseActivity(), BaseView {
         initView()
     }
 
+    // Toolbar相关的方法
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(0, menu)
+        menuInflater.inflate(mToolbar.mMenuId, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId) {
-            0 -> {
-
-            }
-        }
+        mMenuClick?.onMenuClick(item?.itemId)
         return super.onOptionsItemSelected(item)
     }
 
     override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
-        menu?.findItem(0)?.setVisible(false)
+        mMenuList.forEach{
+            menu?.findItem(it.itemId)?.isVisible = it.isVisible
+        }
         return super.onPrepareOptionsMenu(menu)
     }
 
