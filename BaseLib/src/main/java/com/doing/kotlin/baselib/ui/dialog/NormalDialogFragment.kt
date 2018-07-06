@@ -24,7 +24,7 @@ class NormalDialogFragment : DialogFragment(){
     private lateinit var mPositiveText: String
 
     @ColorInt
-    var mButtonTextColor = UiUtils.getColor(R.color.colorPrimary)
+    private var mButtonTextColor = UiUtils.getColor(R.color.colorPrimary)
 
     private var mNegativeListener: ((dialog: DialogInterface , witch: Int) -> Unit)? = null
     private var mPositiveListener: ((dialog: DialogInterface , witch: Int) -> Unit)? = null

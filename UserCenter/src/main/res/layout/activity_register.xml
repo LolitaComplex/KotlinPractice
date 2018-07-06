@@ -18,16 +18,11 @@
             android:background="@color/colorPrimary"
             android:fitsSystemWindows="true"
             doing:menu="@menu/register_menu"
-            >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="注册"
-                android:textColor="@color/common_white"
-                android:textSize="14sp"
-                />
-        </com.doing.kotlin.baselib.ui.widget.GeneralToolbar>
+            doing:commonTitle="注册"
+            doing:titleSize="16sp"
+            doing:titleColor="@color/common_white"
+            doing:titleGravity="center"
+            />
     </android.support.design.widget.AppBarLayout>
 
 

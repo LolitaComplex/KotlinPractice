@@ -11,6 +11,7 @@ import com.doing.kotlin.baselib.injection.module.ActivityModule
 import com.doing.kotlin.baselib.injection.module.LifecycleProviderModule
 import com.doing.kotlin.baselib.presenter.BasePresenter
 import com.doing.kotlin.baselib.presenter.view.BaseView
+import com.doing.kotlin.baselib.ui.dialog.ProgressDialogFragment
 import com.doing.kotlin.baselib.ui.widget.GeneralToolbar
 import javax.inject.Inject
 
@@ -26,6 +27,8 @@ abstract class BaseMvpActivity<T: BasePresenter<*>> : BaseActivity(), BaseView {
     // ============== 通用成员 ==================
     protected lateinit var mToolbar: GeneralToolbar
 
+    private lateinit var mLoadProgressDialog: ProgressDialogFragment
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -38,6 +41,8 @@ abstract class BaseMvpActivity<T: BasePresenter<*>> : BaseActivity(), BaseView {
         setContentView(getLayoutId())
         injection()
         initView()
+
+        mLoadProgressDialog = ProgressDialogFragment.newInstance()
     }
 
     // Toolbar相关的方法
@@ -47,8 +52,12 @@ abstract class BaseMvpActivity<T: BasePresenter<*>> : BaseActivity(), BaseView {
     }
 
     // ============== 功能性方法 ==================
-    override fun showLoading() {}
-    override fun hiddenLoading() {}
+    override fun showLoading() {
+        mLoadProgressDialog.show(supportFragmentManager)
+    }
+    override fun hiddenLoading() {
+        mLoadProgressDialog.dismiss()
+    }
     override fun onError() {}
 
 

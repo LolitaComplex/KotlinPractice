@@ -6,6 +6,7 @@ import android.support.annotation.LayoutRes
 import android.support.v4.app.DialogFragment
 import android.support.v4.app.FragmentManager
 import android.view.*
+import com.doing.kotlin.baselib.R
 
 abstract class BaseDialogFragment : DialogFragment(){
 
@@ -16,19 +17,21 @@ abstract class BaseDialogFragment : DialogFragment(){
         return inflater.inflate(getLayoutId(), container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        intiView(view)
-    }
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         dialog?.apply {
             initDialogAttribute(this)
         }
+        setStyle(DialogFragment.STYLE_NORMAL, R.style.LightDialog)
     }
 
-    protected fun initDialogAttribute(dialog: Dialog) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        intiView(view)
+    }
+
+
+    protected open fun initDialogAttribute(dialog: Dialog) {
         val window = dialog.window
         val attributes = window.attributes
 
@@ -43,16 +46,24 @@ abstract class BaseDialogFragment : DialogFragment(){
         }
 
 
-        //TODO 这个貌似alpha操作透明弹窗的，之后实验一下
         attributes.alpha = 0f
         window.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+        // 灰暗程度
+        attributes.dimAmount = 0.2f
+
+        isCancelable = true
+        dialog.setCancelable(true)
+        dialog.setCanceledOnTouchOutside(true)
+        attributes.gravity = Gravity.CENTER
+
+        dialog.window.attributes = attributes
     }
 
-    fun getOutTag(): String {
+    open fun getOutTag(): String {
         return this.javaClass.simpleName + " : " + dialog?.hashCode()
     }
 
-    fun show(manager: FragmentManager?) {
+    open fun show(manager: FragmentManager?) {
         super.show(manager, getOutTag())
     }
 

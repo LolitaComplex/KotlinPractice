@@ -5,6 +5,7 @@ import android.content.res.ColorStateList
 import android.support.v7.widget.Toolbar
 import android.text.TextUtils
 import android.util.AttributeSet
+import android.util.TypedValue
 import android.view.Gravity
 import com.doing.kotlin.baselib.R
 import com.doing.kotlin.baselib.utils.DensityUtils
@@ -34,7 +35,6 @@ class GeneralToolbar constructor(context: Context, attrs:  AttributeSet?, defSty
             initTitleText(title, titleGravity, titleSize, titleColor)
         }
 
-
         typeArray.recycle()
 
         //配置Toolbar
@@ -53,7 +53,7 @@ class GeneralToolbar constructor(context: Context, attrs:  AttributeSet?, defSty
             layoutParams = params
 
             this.text = text
-            this.textSize = textSize
+            this.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize)
             this.setTextColor(textColor)
             this.singleLine = true
             this.maxLines = 1
