@@ -1,13 +1,13 @@
 package com.doing.kotlin.usercenter.data.repository
 
-import com.doing.kotlin.baselib.data.net.RetrofitFactory
 import com.doing.kotlin.usercenter.data.api.UserApi
+import com.kotlin.provider.data.net.AppRetrofitFactory
 
 class UserRepository private constructor(){
 
     companion object {
         fun getUserApi(): UserApi {
-            return RetrofitFactory.sInstance.create(UserApi::class.java)
+            return AppRetrofitFactory.sInstance.create(UserApi::class.java)
         }
     }
 }

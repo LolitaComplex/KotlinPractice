@@ -3,6 +3,7 @@ package com.doing.kotlin.baselib.ui.widget
 import android.content.Context
 import android.content.res.ColorStateList
 import android.support.v7.widget.Toolbar
+import android.text.TextUtils
 import android.util.AttributeSet
 import android.view.Gravity
 import com.doing.kotlin.baselib.R
@@ -24,12 +25,15 @@ class GeneralToolbar constructor(context: Context, attrs:  AttributeSet?, defSty
         val typeArray = context.obtainStyledAttributes(attrs, R.styleable.GeneralToolbar)
         mMenuId = typeArray.getResourceId(R.styleable.GeneralToolbar_menu, R.menu.nullable_toolbar_menu)
 
-        val title = typeArray.getString(R.styleable.GeneralToolbar_showTitle)
+        val title = typeArray.getString(R.styleable.GeneralToolbar_commonTitle)
         val titleGravity = typeArray.getInt(R.styleable.GeneralToolbar_titleGravity, Gravity.CENTER)
         val titleSize = typeArray.getDimension(R.styleable.GeneralToolbar_titleSize,
                 DensityUtils.sp2px(12.0f).toFloat())
         val titleColor = typeArray.getColorStateList(R.styleable.GeneralToolbar_titleColor)
-        initTitleText(title, titleGravity, titleSize, titleColor)
+        if (!TextUtils.isEmpty(title)) {
+            initTitleText(title, titleGravity, titleSize, titleColor)
+        }
+
 
         typeArray.recycle()
 
@@ -43,7 +47,7 @@ class GeneralToolbar constructor(context: Context, attrs:  AttributeSet?, defSty
      * 添加标题栏
      */
     private fun initTitleText(text: String, textGravity: Int, textSize: Float, textColor: ColorStateList) {
-        val textView = textView {
+        textView {
             val params = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
             params.gravity = textGravity
             layoutParams = params
@@ -54,7 +58,6 @@ class GeneralToolbar constructor(context: Context, attrs:  AttributeSet?, defSty
             this.singleLine = true
             this.maxLines = 1
         }
-        addView(textView)
     }
 
 }

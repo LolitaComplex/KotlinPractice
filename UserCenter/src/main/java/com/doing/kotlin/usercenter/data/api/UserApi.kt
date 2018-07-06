@@ -2,9 +2,9 @@ package com.doing.kotlin.usercenter.data.api
 
 import com.doing.kotlin.baselib.data.protocal.BaseResponse
 import com.doing.kotlin.usercenter.data.protocal.RegisterReq
+import io.reactivex.Flowable
 import retrofit2.http.Body
 import retrofit2.http.POST
-import rx.Observable
 
 interface UserApi {
 
@@ -13,5 +13,5 @@ interface UserApi {
 //                 @Field("verifyCode") verifyCode: String): Observable<BaseResponse<String>>
 
     @POST("userCenter/register")
-    fun register(@Body body: RegisterReq): Observable<BaseResponse<String>>
+    fun register(@Body body: RegisterReq): Flowable<BaseResponse<String>>
 }

@@ -1,22 +1,38 @@
 package com.doing.kotlin.baselib.data.rx
 
 import android.util.Log
-import rx.Subscriber
+import io.reactivex.FlowableSubscriber
+import org.reactivestreams.Subscription
 
-open class BaseSubscriber<T>: Subscriber<T>() {
+open class BaseSubscriber<T>: FlowableSubscriber<T> {
+
+    protected lateinit var mSubscription: Subscription
 
     companion object {
         private const val TAG = "BaseSubscriber"
     }
 
+    override fun onSubscribe(s: Subscription) {
+        mSubscription = s
+    }
+
     override fun onNext(t: T) {
+
     }
 
-    override fun onCompleted() {
-        Log.d(TAG, "onCompleted")
+    open fun onApiError(code: Int, message: String) {
+
     }
 
-    override fun onError(e: Throwable?) {
-        Log.e(TAG, "onError", e)
+    override fun onError(e: Throwable) {
+        Log.e(TAG, e.message, e)
+        if (e is BaseException) {
+            onApiError(e.mCode, e.mMessage)
+        }
     }
+
+    override fun onComplete() {
+        Log.d(TAG, "onComplete()")
+    }
+
 }

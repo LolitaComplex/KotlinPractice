@@ -4,7 +4,6 @@ import android.content.Context
 import android.os.Bundle
 import android.support.annotation.LayoutRes
 import android.view.Menu
-import android.view.MenuItem
 import com.doing.kotlin.baselib.common.BaseApplication
 import com.doing.kotlin.baselib.injection.component.ActivityComponent
 import com.doing.kotlin.baselib.injection.component.DaggerActivityComponent
@@ -26,10 +25,6 @@ abstract class BaseMvpActivity<T: BasePresenter<*>> : BaseActivity(), BaseView {
 
     // ============== 通用成员 ==================
     protected lateinit var mToolbar: GeneralToolbar
-    protected var mMenuClick: MenuClick? = null
-    protected val mMenuList: List<MenuItem> by lazy {
-        ArrayList<MenuItem>()
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,18 +44,6 @@ abstract class BaseMvpActivity<T: BasePresenter<*>> : BaseActivity(), BaseView {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(mToolbar.mMenuId, menu)
         return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        mMenuClick?.onMenuClick(item?.itemId)
-        return super.onOptionsItemSelected(item)
-    }
-
-    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
-        mMenuList.forEach{
-            menu?.findItem(it.itemId)?.isVisible = it.isVisible
-        }
-        return super.onPrepareOptionsMenu(menu)
     }
 
     // ============== 功能性方法 ==================

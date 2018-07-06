@@ -8,7 +8,6 @@ import android.view.Gravity
 import android.view.ViewGroup
 import com.doing.kotlin.baselib.utils.toast
 import org.jetbrains.anko.*
-import org.jetbrains.anko.sdk25.coroutines.onClick
 
 class TestActivity : AppCompatActivity() {
 
@@ -37,9 +36,9 @@ class TestActivity : AppCompatActivity() {
                 width = ViewGroup.LayoutParams.MATCH_PARENT
                 height = ViewGroup.LayoutParams.WRAP_CONTENT
                 padding = 10
-                onClick {
-                    "Kotlin是全世界的最好语言".toast()
-                }
+//                onClick {
+//                    "Kotlin是全世界的最好语言".toast()
+//                }
             }
         }
 

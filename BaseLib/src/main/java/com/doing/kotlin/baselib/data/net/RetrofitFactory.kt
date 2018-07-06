@@ -4,18 +4,19 @@ import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-class RetrofitFactory private constructor(){
+open class RetrofitFactory{
 
     companion object {
         val sInstance: RetrofitFactory by lazy{ RetrofitFactory() }
     }
 
-    private val mRetrofit: Retrofit
-    private val mInterceptor: Interceptor
+    protected val mRetrofit: Retrofit
+    protected val mInterceptor: Interceptor
+    protected val mOkHttpClient: OkHttpClient
 
     init {
         mInterceptor = Interceptor{chain ->
@@ -29,17 +30,22 @@ class RetrofitFactory private constructor(){
                     }
         }
 
-        mRetrofit = Retrofit.Builder()
-                .baseUrl(NetConstant.HOST)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .client(initClient())
-                .build()
+        mOkHttpClient = initClient()
 
-
+        mRetrofit = initRetrofit()
     }
 
-    private fun initClient(): OkHttpClient {
+    protected open fun initRetrofit(): Retrofit {
+        return Retrofit.Builder()
+                .baseUrl(NetConstant.HOST)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .client(mOkHttpClient)
+                .build()
+    }
+
+
+    protected open fun initClient(): OkHttpClient {
         return OkHttpClient.Builder()
                 .addInterceptor(initLogInterceptor())
                 .addInterceptor(mInterceptor)

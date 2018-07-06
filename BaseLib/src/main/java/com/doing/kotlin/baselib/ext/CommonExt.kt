@@ -2,14 +2,13 @@ package com.doing.kotlin.baselib.ext
 
 import android.widget.TextView
 import com.doing.kotlin.baselib.data.rx.BaseSubscriber
-import com.trello.rxlifecycle.LifecycleProvider
-import rx.Observable
-import rx.Subscription
-import rx.android.schedulers.AndroidSchedulers
-import rx.schedulers.Schedulers
+import com.trello.rxlifecycle2.LifecycleProvider
+import io.reactivex.Flowable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
-fun <T> Observable<T>.execute(subscriber: BaseSubscriber<T>, provider: LifecycleProvider<*>): Subscription {
-    return this.compose(provider.bindToLifecycle())
+fun <T> Flowable<T>.execute(subscriber: BaseSubscriber<T>, provider: LifecycleProvider<*>) {
+    this.compose(provider.bindToLifecycle())
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(subscriber)

@@ -4,7 +4,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    xmlns:doing="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.activity.RegisterActivity">
+
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.doing.kotlin.baselib.ui.widget.GeneralToolbar
+            android:layout_width="match_parent"
+            android:layout_height="?android:actionBarSize"
+            android:background="@color/colorPrimary"
+            android:fitsSystemWindows="true"
+            doing:menu="@menu/register_menu"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="注册"
+                android:textColor="@color/common_white"
+                android:textSize="14sp"
+                />
+        </com.doing.kotlin.baselib.ui.widget.GeneralToolbar>
+    </android.support.design.widget.AppBarLayout>
+
+
 
     <LinearLayout
         android:layout_width="match_parent"

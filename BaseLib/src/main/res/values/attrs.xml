@@ -3,10 +3,10 @@
 
     <declare-styleable name="GeneralToolbar" >
         <attr name="menu" format="reference"/>
-        <attr name="showTitle" format="string" />
+        <attr name="commonTitle" format="string" />
         <attr name="titleColor" format="color|reference" />
         <attr name="titleSize" format="dimension" />
-        <attr name="titleGravity" format="flag" >
+        <attr name="titleGravity">
             <flag name="top" value="0x30" />
             <!-- Push object to the bottom of its container, not changing its size. -->
             <flag name="bottom" value="0x50" />

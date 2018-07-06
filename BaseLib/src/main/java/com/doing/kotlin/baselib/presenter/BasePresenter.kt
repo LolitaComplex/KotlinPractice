@@ -2,7 +2,7 @@ package com.doing.kotlin.baselib.presenter
 
 import android.content.Context
 import com.doing.kotlin.baselib.presenter.view.BaseView
-import com.trello.rxlifecycle.LifecycleProvider
+import com.trello.rxlifecycle2.LifecycleProvider
 import javax.inject.Inject
 
 open class BasePresenter<T : BaseView>{

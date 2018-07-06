@@ -5,7 +5,7 @@ import android.content.Context
 import com.doing.kotlin.baselib.injection.ActivityScope
 import com.doing.kotlin.baselib.injection.module.ActivityModule
 import com.doing.kotlin.baselib.injection.module.LifecycleProviderModule
-import com.trello.rxlifecycle.LifecycleProvider
+import com.trello.rxlifecycle2.LifecycleProvider
 import dagger.Component
 
 @ActivityScope

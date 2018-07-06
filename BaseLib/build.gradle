@@ -3,13 +3,11 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 27
-
-
+    compileSdkVersion project.compileSdkVersion
 
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 27
+        minSdkVersion project.minSdkVersion
+        targetSdkVersion project.targetSdkVersion
         versionCode 1
         versionName "1.0"
 
@@ -27,40 +25,37 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+//    implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation 'com.android.support:appcompat-v7:27.1.1'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
-    // Appcompat-v7 (only Anko Commons)
-    compile "org.jetbrains.anko:anko-appcompat-v7-commons:$anko_version"
-    // Support-v4 (only Anko Commons)
-    compile "org.jetbrains.anko:anko-support-v4-commons:$anko_version"
+    api commonDependencies.supportAppcompat
+    api commonDependencies.supportDesign
+    api commonDependencies.supportRecyclerView
+    api commonDependencies.supportCardView
 
-    // Anko Layouts
-    compile "org.jetbrains.anko:anko-sdk25:$anko_version" // sdk15, sdk19, sdk21, sdk23 are also available
-    compile "org.jetbrains.anko:anko-appcompat-v7:$anko_version"
+    api commonDependencies.kotlin
+    api commonDependencies.ankoV7
+    api commonDependencies.ankoV4
+    api commonDependencies.ankoLayoutSdk
+    api commonDependencies.anlaLayoutV7
 
-    // Coroutine listeners for Anko Layouts
-    compile "org.jetbrains.anko:anko-sdk25-coroutines:$anko_version"
-    compile "org.jetbrains.anko:anko-appcompat-v7-coroutines:$anko_version"
+    api commonDependencies.rxKotlin
+    api commonDependencies.rxAndroid
 
-    compile "io.reactivex:rxkotlin:${rx_kotlin_version}"
-    compile "io.reactivex:rxandroid:${rx_android_version}"
+    api commonDependencies.okhttp
+    api commonDependencies.okhttpLogging
+    api commonDependencies.retrofit
+    api commonDependencies.retrofitGson
+    api commonDependencies.retrofitRx
 
-    compile "com.squareup.okhttp3:okhttp:3.10.0"
-    compile "com.squareup.okhttp3:logging-interceptor:3.10.0"
-    compile "com.squareup.retrofit2:retrofit:2.2.0"
-    compile "com.squareup.retrofit2:converter-gson:2.2.0"
-    compile "com.squareup.retrofit2:adapter-rxjava:2.2.0"
-    compile 'com.google.dagger:dagger:2.15'
-    kapt 'com.google.dagger:dagger-compiler:2.15'
+    api commonDependencies.dagger
+    kapt commonDependencies.daggerApt
 
-    compile 'com.trello:rxlifecycle-kotlin:1.0'
-    compile 'com.trello:rxlifecycle-components:1.0'
+    api commonDependencies.rxlifecycleKotlin
+    api commonDependencies.rxlifecycleComponents
 }
 
 repositories {

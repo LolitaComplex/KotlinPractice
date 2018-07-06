@@ -10,12 +10,13 @@ import com.doing.kotlin.usercenter.injection.module.UserModule
 import com.doing.kotlin.usercenter.precenter.RegisterPresenter
 import com.doing.kotlin.usercenter.precenter.view.RegisterView
 import kotlinx.android.synthetic.main.activity_register.*
+import org.jetbrains.anko.frameLayout
 import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.textView
 import java.util.*
 
 
 class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView, View.OnClickListener {
-
 
     companion object {
         const val KEY = "key"
@@ -53,11 +54,12 @@ class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView, Vie
             }
             R.id.mBtnRegister -> {
                 val mobile = mEtTelNum.getTrimText()
+                val verifyCode = mEtVerifyCode.getTrimText()
                 val pwd = mEtPassword.getTrimText()
                 val ensurePwd = mEtEnsurePassword.getTrimText()
 
                 if (pwd == ensurePwd) {
-                    mPresenter.register(mobile, pwd, ensurePwd)
+                    mPresenter.register(mobile, pwd, verifyCode)
                 } else {
                     "密码输入有误".toast()
                 }
