@@ -7,7 +7,7 @@ fun String.toast() {
     ToastUtil.show(this)
 }
 
-private class ToastUtil{
+class ToastUtil{
     companion object {
         private val mToast: Toast by lazy {
             Toast.makeText(BaseApplication.mContext,

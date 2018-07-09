@@ -1,8 +1,11 @@
 package com.doing.kotlin.usercenter.ui.activity
 
 import android.view.View
+import android.view.ViewGroup
+import android.widget.Toast
 import com.doing.kotlin.baselib.ext.getTrimText
 import com.doing.kotlin.baselib.ui.activity.BaseMvpActivity
+import com.doing.kotlin.baselib.utils.ToastUtil
 import com.doing.kotlin.baselib.utils.toast
 import com.doing.kotlin.usercenter.R
 import com.doing.kotlin.usercenter.injection.component.DaggerUserComponent

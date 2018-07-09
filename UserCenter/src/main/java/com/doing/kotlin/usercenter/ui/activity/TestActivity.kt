@@ -6,6 +6,7 @@ import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import android.view.Gravity
 import android.view.ViewGroup
+import com.doing.kotlin.baselib.utils.ToastUtil
 import com.doing.kotlin.baselib.utils.toast
 import org.jetbrains.anko.*
 
@@ -46,7 +47,7 @@ class TestActivity : AppCompatActivity() {
 
         Handler().postDelayed({
             intent.getStringArrayListExtra(RegisterActivity.VALUE)
-                    .forEach { it.toast() }
+                    .forEach { ToastUtil.show(it) }
         }, 1000)
     }
 }

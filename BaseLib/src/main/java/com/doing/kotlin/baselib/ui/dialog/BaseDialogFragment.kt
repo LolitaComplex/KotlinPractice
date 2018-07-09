@@ -1,6 +1,8 @@
 package com.doing.kotlin.baselib.ui.dialog
 
 import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.support.annotation.LayoutRes
 import android.support.v4.app.DialogFragment
@@ -46,10 +48,11 @@ abstract class BaseDialogFragment : DialogFragment(){
         }
 
 
-        attributes.alpha = 0f
-        window.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+//        attributes.alpha = 0.5f
         // 灰暗程度
-        attributes.dimAmount = 0.2f
+        window.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+        window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        attributes.dimAmount = 0f
 
         isCancelable = true
         dialog.setCancelable(true)
@@ -64,7 +67,15 @@ abstract class BaseDialogFragment : DialogFragment(){
     }
 
     open fun show(manager: FragmentManager?) {
-        super.show(manager, getOutTag())
+        if (!isVisible) {
+            this.show(manager, getOutTag())
+        }
+    }
+
+    override fun dismiss() {
+        if (isVisible) {
+            this.dismiss()
+        }
     }
 
     // 模板方法

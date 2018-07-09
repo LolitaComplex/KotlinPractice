@@ -26,8 +26,8 @@ class NormalDialogFragment : DialogFragment(){
     @ColorInt
     private var mButtonTextColor = UiUtils.getColor(R.color.colorPrimary)
 
-    private var mNegativeListener: ((dialog: DialogInterface , witch: Int) -> Unit)? = null
-    private var mPositiveListener: ((dialog: DialogInterface , witch: Int) -> Unit)? = null
+    var mNegativeListener: ((dialog: DialogInterface , witch: Int) -> Unit)? = null
+    var mPositiveListener: ((dialog: DialogInterface , witch: Int) -> Unit)? = null
 
     companion object {
         fun newInstance(title: String?, message: String?, positiveText: String): NormalDialogFragment {
@@ -61,7 +61,7 @@ class NormalDialogFragment : DialogFragment(){
                 setMessage(mMessage)
             }
 
-            if (TextUtils.isEmpty(mNavigationText) && mNegativeListener != null) {
+            if (!TextUtils.isEmpty(mNavigationText) && mNegativeListener != null) {
                 setNegativeButton(mNavigationText, mNegativeListener)
             }
 
@@ -71,12 +71,20 @@ class NormalDialogFragment : DialogFragment(){
         }.create()
     }
 
-    private fun getOutTag(): String {
-        return "NormalDialogFragment" + mPositiveListener?.hashCode()
+    open fun getOutTag(): String {
+        return this.javaClass.simpleName + " : " + dialog?.hashCode()
     }
 
-    fun show(transaction: FragmentTransaction?): Int {
-        return super.show(transaction, getOutTag())
+    fun show(manager: FragmentManager?) {
+        if (!isVisible) {
+            super.show(manager, getOutTag())
+        }
+    }
+
+    override fun dismiss() {
+        if (isVisible) {
+            super.dismiss()
+        }
     }
 
     override fun show(manager: FragmentManager?, tag: String?) {

@@ -2,6 +2,7 @@ package com.doing.kotlin.usercenter.precenter
 
 import com.doing.kotlin.baselib.data.rx.BaseSubscriber
 import com.doing.kotlin.baselib.ext.execute
+import com.doing.kotlin.baselib.ext.executeAndShowProgress
 import com.doing.kotlin.baselib.presenter.BasePresenter
 import com.doing.kotlin.usercenter.precenter.view.RegisterView
 import com.doing.kotlin.usercenter.service.impl.UserService
@@ -18,11 +19,11 @@ class RegisterPresenter @Inject constructor(): BasePresenter<RegisterView>() {
 
     fun register(mobile: String, pwd: String, verifyCode: String) {
         mUserService.register(mobile, pwd, verifyCode)
-                .execute(object : BaseSubscriber<Boolean>() {
+                .executeAndShowProgress(object : BaseSubscriber<Boolean>() {
                     override fun onNext(t: Boolean) {
                         mView.onRegisterResult(t)
                     }
-                }, mProvider)
+                }, mProvider, mView)
 
     }
 }
