@@ -59,6 +59,10 @@ dependencies {
     api commonDependencies.dagger
     kapt commonDependencies.daggerApt
 
+    api commonDependencies.glide
+    kapt commonDependencies.glideApt
+    api commonDependencies.glideOkHttp
+
     api commonDependencies.rxlifecycleKotlin
     api commonDependencies.rxlifecycleComponents
 }

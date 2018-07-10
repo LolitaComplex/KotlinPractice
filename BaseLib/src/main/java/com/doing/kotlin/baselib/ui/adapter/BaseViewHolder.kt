@@ -15,6 +15,7 @@ import android.view.ViewGroup
 import android.widget.CompoundButton
 import android.widget.ImageView
 import android.widget.TextView
+import com.doing.kotlin.baselib.data.image.ImageUtils
 
 
 /**
@@ -110,7 +111,9 @@ class BaseViewHolder private constructor(private val mContext: Context, private 
         }
 
         val imageView = getView<ImageView>(viewId)
-        //TODO
+        if (imageView != null) {
+            ImageUtils.setUrl(imageView, url, placeHolder)
+        }
         return this
     }
 
@@ -120,7 +123,9 @@ class BaseViewHolder private constructor(private val mContext: Context, private 
         }
 
         val imageView = getView<ImageView>(viewId)
-        //TODO
+        if (imageView != null) {
+            ImageUtils.setCircleUrl(imageView, url, placeHolder)
+        }
         return this
     }
 

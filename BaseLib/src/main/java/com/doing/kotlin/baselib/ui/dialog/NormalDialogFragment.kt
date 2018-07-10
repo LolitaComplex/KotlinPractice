@@ -71,7 +71,7 @@ class NormalDialogFragment : DialogFragment(){
         }.create()
     }
 
-    open fun getOutTag(): String {
+    private fun getOutTag(): String {
         return this.javaClass.simpleName + " : " + dialog?.hashCode()
     }
 

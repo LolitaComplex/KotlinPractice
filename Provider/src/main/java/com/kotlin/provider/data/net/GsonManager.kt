@@ -25,6 +25,11 @@ class GsonManager private constructor(){
         private val mJsonParser: Gson = GsonBuilder().create()
         private val mTypeList = ArrayList<Class<*>>()
 
+        init {
+            // TODO 添加异常解析处理的Entity
+//            mTypeList.add()
+        }
+
         override fun <T> create(gson: Gson, type: TypeToken<T>): TypeAdapter<T> {
             var deserializer: JsonDeserializer<T>? = null
             val rawType = type.rawType

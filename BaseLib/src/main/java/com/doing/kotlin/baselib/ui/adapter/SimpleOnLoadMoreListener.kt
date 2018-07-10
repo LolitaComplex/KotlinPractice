@@ -20,6 +20,7 @@ abstract class SimpleOnLoadMoreListener<T> protected constructor(private val mLo
     @Retention(AnnotationRetention.SOURCE)
     private annotation class LoadType
 
+
     @LoadType
     private var mLoadType = TYPE_IDLE
 
