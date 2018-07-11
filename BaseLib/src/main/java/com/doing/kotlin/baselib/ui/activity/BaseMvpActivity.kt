@@ -3,7 +3,9 @@ package com.doing.kotlin.baselib.ui.activity
 import android.content.Context
 import android.os.Bundle
 import android.support.annotation.LayoutRes
+import android.support.v7.app.ActionBar
 import android.view.Menu
+import com.doing.kotlin.baselib.R
 import com.doing.kotlin.baselib.common.BaseApplication
 import com.doing.kotlin.baselib.injection.component.ActivityComponent
 import com.doing.kotlin.baselib.injection.component.DaggerActivityComponent
@@ -13,6 +15,7 @@ import com.doing.kotlin.baselib.presenter.BasePresenter
 import com.doing.kotlin.baselib.presenter.view.BaseView
 import com.doing.kotlin.baselib.ui.dialog.ProgressDialogFragment
 import com.doing.kotlin.baselib.ui.widget.GeneralToolbar
+import org.jetbrains.anko.find
 import javax.inject.Inject
 
 abstract class BaseMvpActivity<T: BasePresenter<*>> : BaseActivity(), BaseView {
@@ -25,7 +28,7 @@ abstract class BaseMvpActivity<T: BasePresenter<*>> : BaseActivity(), BaseView {
     protected lateinit var mContext: Context
 
     // ============== 通用成员 ==================
-    protected lateinit var mToolbar: GeneralToolbar
+    protected var mToolbar: GeneralToolbar? = null
 
     private lateinit var mLoadProgressDialog: ProgressDialogFragment
 
@@ -42,12 +45,21 @@ abstract class BaseMvpActivity<T: BasePresenter<*>> : BaseActivity(), BaseView {
         injection()
         initView()
 
+        mToolbar?.let {
+            setSupportActionBar(mToolbar)
+            supportActionBar!!.setDisplayShowTitleEnabled(false)
+            initActionBar(supportActionBar!!)
+        }
+
+
         mLoadProgressDialog = ProgressDialogFragment.newInstance()
     }
 
     // Toolbar相关的方法
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(mToolbar.mMenuId, menu)
+        mToolbar?.let {
+            menuInflater.inflate(it.mMenuId, menu)
+        }
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -55,16 +67,21 @@ abstract class BaseMvpActivity<T: BasePresenter<*>> : BaseActivity(), BaseView {
     override fun showLoading() {
         mLoadProgressDialog.show(supportFragmentManager)
     }
+
     override fun hiddenLoading() {
         mLoadProgressDialog.dismiss()
     }
-    override fun onError() {}
 
+    override fun onError() {}
 
     // ============== 模板方法 ==================
     @LayoutRes
     protected abstract fun getLayoutId(): Int
     protected abstract fun injection()
     protected abstract fun initView()
+
+    protected open fun initActionBar(actionBar: ActionBar) {
+
+    }
 
 }

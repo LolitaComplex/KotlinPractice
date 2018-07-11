@@ -1,10 +1,9 @@
-package com.kotlin.base.utils
+package com.doing.kotlin.baselib.utils
 
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.SharedPreferences.Editor
 import com.doing.kotlin.baselib.common.BaseConstant
-import com.doing.kotlin.baselib.utils.UiUtils
 
 /*
     SP工具类

@@ -4,7 +4,7 @@ import android.widget.TextView
 import com.doing.kotlin.baselib.data.rx.BaseSubscriber
 import com.doing.kotlin.baselib.presenter.view.BaseView
 import com.doing.kotlin.baselib.utils.ToastUtil
-import com.kotlin.base.utils.NetWorkUtils
+import com.doing.kotlin.baselib.utils.NetWorkUtils
 import com.trello.rxlifecycle2.LifecycleProvider
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
