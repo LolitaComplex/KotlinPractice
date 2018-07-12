@@ -10,7 +10,9 @@
         <item name="android:textSize">@dimen/text_middle_size</item>
         <item name="android:windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="toolbarStyle">@style/ToolbarStyle</item>
     </style>
+    
 
     <style name="LightDialog" parent="@android:style/Theme.Dialog" >
         <item name="android:windowFrame">@null</item>

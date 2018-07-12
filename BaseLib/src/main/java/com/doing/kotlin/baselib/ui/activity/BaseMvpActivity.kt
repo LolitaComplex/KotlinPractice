@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.support.annotation.LayoutRes
 import android.support.v7.app.ActionBar
 import android.view.Menu
-import com.doing.kotlin.baselib.R
 import com.doing.kotlin.baselib.common.BaseApplication
 import com.doing.kotlin.baselib.injection.component.ActivityComponent
 import com.doing.kotlin.baselib.injection.component.DaggerActivityComponent
@@ -15,7 +14,6 @@ import com.doing.kotlin.baselib.presenter.BasePresenter
 import com.doing.kotlin.baselib.presenter.view.BaseView
 import com.doing.kotlin.baselib.ui.dialog.ProgressDialogFragment
 import com.doing.kotlin.baselib.ui.widget.GeneralToolbar
-import org.jetbrains.anko.find
 import javax.inject.Inject
 
 abstract class BaseMvpActivity<T: BasePresenter<*>> : BaseActivity(), BaseView {

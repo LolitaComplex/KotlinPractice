@@ -7,8 +7,10 @@ import android.text.TextUtils
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.Gravity
+import android.widget.TextView
 import com.doing.kotlin.baselib.R
 import com.doing.kotlin.baselib.utils.DensityUtils
+import com.doing.kotlin.baselib.utils.ToastUtil
 import org.jetbrains.anko.singleLine
 import org.jetbrains.anko.textView
 
@@ -20,6 +22,8 @@ class GeneralToolbar constructor(context: Context, attrs:  AttributeSet?, defSty
 
     var mMenuId = R.menu.nullable_toolbar_menu
         private set
+
+    private var mTvTitle: TextView? = null
 
     init {
         // 初始化自定义属性
@@ -38,9 +42,11 @@ class GeneralToolbar constructor(context: Context, attrs:  AttributeSet?, defSty
         typeArray.recycle()
 
         //配置Toolbar
-        this.contentInsetStartWithNavigation = 0
-        this.setContentInsetsRelative(0, 0)
+//        this.contentInsetStartWithNavigation = 0
+//        this.setContentInsetsRelative(0, 0)
+//        this.setContentInsetsAbsolute(0, 0)
         this.fitsSystemWindows = true
+
     }
 
     /**
@@ -57,7 +63,12 @@ class GeneralToolbar constructor(context: Context, attrs:  AttributeSet?, defSty
             this.setTextColor(textColor)
             this.singleLine = true
             this.maxLines = 1
+            this@GeneralToolbar.mTvTitle = this
         }
+    }
+
+    fun setGeneralTitle(text: String){
+        mTvTitle?.text = text
     }
 
 }

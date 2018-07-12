@@ -1,8 +1,13 @@
 package com.doing.kotlin.baselib.ext
 
+import android.text.Editable
+import android.text.TextWatcher
+import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import com.doing.kotlin.baselib.data.rx.BaseSubscriber
 import com.doing.kotlin.baselib.presenter.view.BaseView
+import com.doing.kotlin.baselib.ui.listener.SimpleTextWatcher
 import com.doing.kotlin.baselib.utils.ToastUtil
 import com.doing.kotlin.baselib.utils.NetWorkUtils
 import com.trello.rxlifecycle2.LifecycleProvider
@@ -31,6 +36,21 @@ fun <T> Flowable<T>.executeAndShowProgress(subscriber: BaseSubscriber<T>, provid
         .subscribe(subscriber)
 }
 
-fun TextView.getTrimText(): String {
+fun EditText.getTrimText(): String {
     return this.text.toString().trim()
+}
+
+fun Button.isClickEnable(vararg edits: TextView, enableMethod: () -> Boolean) {
+    val button = this
+    for (edit in edits) {
+        edit.addTextChangedListener(object: SimpleTextWatcher(){
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val enable = enableMethod.invoke()
+                button.isEnabled = enable
+                button.isClickable = enable
+                button.isLongClickable = enable
+            }
+        })
+    }
 }

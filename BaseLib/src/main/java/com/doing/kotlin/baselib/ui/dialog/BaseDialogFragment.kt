@@ -74,7 +74,7 @@ abstract class BaseDialogFragment : DialogFragment(){
 
     override fun dismiss() {
         if (isVisible) {
-            this.dismiss()
+            super.dismiss()
         }
     }
 
