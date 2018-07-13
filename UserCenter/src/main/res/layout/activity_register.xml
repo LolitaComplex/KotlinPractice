@@ -10,10 +10,7 @@
             style="@style/GeneralToolbarStyle"
             app:commonTitle="注册"
             app:menu="@menu/register_menu"
-            app:popupTheme="@style/ToolbarStyle"
-            app:titleColor="@color/common_white"
-            app:titleGravity="center"
-            app:titleSize="16sp" />
+            />
     </android.support.design.widget.AppBarLayout>
 
     <LinearLayout

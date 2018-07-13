@@ -65,7 +65,8 @@ class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView, Vie
     }
 
     override fun onRegisterResult(result: Boolean) {
-        "注册成功".toast()
+        val text = if (result) "注册成功" else "注册失败"
+        ToastUtil.show(text)
     }
 
     override fun onClick(v: View) {

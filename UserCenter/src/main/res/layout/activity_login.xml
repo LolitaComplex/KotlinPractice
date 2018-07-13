@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/MatchMatch.Vertical.Common">
+
+    <com.doing.kotlin.baselib.ui.widget.GeneralToolbar
+        android:id="@+id/mToolbar"
+        style="@style/GeneralToolbarStyle"
+        app:commonTitle="登录" />
+
+    <LinearLayout
+        style="@style/MatchWrap.Vertical"
+        android:layout_margin="@dimen/common_margin"
+        android:background="@drawable/border_corner_all">
+
+        <EditText
+            android:id="@+id/mEtMobile"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/common_line_height"
+            android:background="@null"
+            android:drawableLeft="@drawable/icon_user_name"
+            android:drawableStart="@drawable/icon_user_name"
+            android:drawablePadding="@dimen/common_padding_small"
+            android:hint="请输入手机号码"
+            android:inputType="phone"
+            android:paddingLeft="@dimen/common_padding_small"
+            android:paddingStart="@dimen/common_padding_small"
+            />
+
+        <View style="@style/DividerFixedHeight" />
+
+        <EditText
+            android:id="@+id/mEtPwd"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/common_line_height"
+            android:background="@null"
+            android:drawableLeft="@drawable/icon_pwd"
+            android:drawableStart="@drawable/icon_pwd"
+            android:drawablePadding="@dimen/common_padding_small"
+            android:hint="请输入密码"
+            android:inputType="textPassword"
+            android:paddingLeft="@dimen/common_padding_small"
+            android:paddingStart="@dimen/common_padding_small"
+
+            />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/mBtnLogin"
+        style="@style/FullBtnStyle"
+        android:text="登录" />
+
+    <TextView
+        android:id="@+id/mTvForgetPwd"
+        style="@style/WrapWrap"
+        android:layout_gravity="end"
+        android:layout_marginRight="@dimen/common_margin"
+        android:layout_marginEnd="@dimen/common_margin"
+        android:text="忘记密码？"
+        android:textColor="@color/common_blue" />
+</LinearLayout>

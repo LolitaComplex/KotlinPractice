@@ -1,29 +1,39 @@
 package com.kotlin.provider.data.net
 
-import com.doing.kotlin.baselib.data.protocal.BaseResponse
-import com.doing.kotlin.baselib.data.rx.BaseException
+import android.util.Log
+import com.doing.kotlin.baselib.common.BaseConstant
+import com.doing.kotlin.baselib.data.rx.ApiException
 import com.google.gson.Gson
+import com.google.gson.JsonSyntaxException
 import okhttp3.ResponseBody
+import org.json.JSONException
+import org.json.JSONObject
 import retrofit2.Converter
-import java.io.IOException
 import java.lang.reflect.Type
 
 class ApiResponseConverter<T>(val gson: Gson, val type: Type) : Converter<ResponseBody, T> {
 
-    @Throws(IOException::class)
     override fun convert(value: ResponseBody): T? {
         val json = value.string()
-        val result: BaseResponse<*>
-        result = gson.fromJson(json, BaseResponse::class.java)
-        result.mJson = json
-        return dealResult(result)
+        Log.i(BaseConstant.NET_JSON_TAG, json)
+        val jObject = JSONObject(json)
+        return try {
+            val status = jObject.getInt("status")
+            dealResult(status, jObject)
+        } catch (e: JSONException) {
+            "" as T
+        } catch (e: JsonSyntaxException) {
+            throw JsonSyntaxException("Json跟标签解析异常:\t + $json")
+        }
     }
 
-    private fun dealResult(result: BaseResponse<*>): T? {
-        return if (result.status == 0) {
-            gson.fromJson<T>(gson.toJson(result.data), this.type)
+    private fun dealResult(status: Int, jsonObject: JSONObject): T?  {
+        return if (status == 0) {
+            val data = jsonObject.getJSONObject("data")
+            gson.fromJson<T>(data.toString(), this.type)
         } else {
-            throw BaseException(result.status, result.message)
+            val message = jsonObject.getString("message")
+            throw ApiException(status, message)
         }
     }
 }

@@ -1,6 +1,11 @@
 package com.doing.kotlin.baselib.common
 
-public object BaseConstant{
+object BaseConstant{
 
-    const val TABLE_PREFS: String = "Kotlin_Practice_Sp"
+    const val TABLE_PREFS = "Kotlin_Practice_Sp"
+
+    const val NET_JSON_TAG = "Network_Json"
+
+    const val HOST = "http://todayismonday.cn/Kotlin_Server/"
+
 }

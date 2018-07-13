@@ -67,15 +67,9 @@ abstract class BaseDialogFragment : DialogFragment(){
     }
 
     open fun show(manager: FragmentManager?) {
-        if (!isVisible) {
+//        if (!isVisible) {
             this.show(manager, getOutTag())
-        }
-    }
-
-    override fun dismiss() {
-        if (isVisible) {
-            super.dismiss()
-        }
+//        }
     }
 
     // 模板方法

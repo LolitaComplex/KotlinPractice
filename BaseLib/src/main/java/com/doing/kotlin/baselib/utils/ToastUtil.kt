@@ -9,16 +9,17 @@ fun String.toast() {
 
 class ToastUtil{
     companion object {
-        private val mToast: Toast by lazy {
-            Toast.makeText(BaseApplication.mContext,
-                    String(), Toast.LENGTH_SHORT).apply {
-                show()
-            }
-        }
+        private var mToast: Toast? = null
 
         fun show(text: String) {
-            mToast.setText(text)
-            mToast.show()
+            if (mToast == null) {
+                mToast = Toast.makeText(UiUtils.getContext(), "", Toast.LENGTH_SHORT)
+            }
+
+            mToast?.let {
+                it.setText(text)
+                it.show()
+            }
         }
     }
 }

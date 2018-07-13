@@ -1,5 +1,6 @@
 package com.doing.kotlin.baselib.data.net
 
+import com.doing.kotlin.baselib.common.BaseConstant
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -37,7 +38,7 @@ open class RetrofitFactory{
 
     protected open fun initRetrofit(): Retrofit {
         return Retrofit.Builder()
-                .baseUrl(NetConstant.HOST)
+                .baseUrl(BaseConstant.HOST)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(mOkHttpClient)
