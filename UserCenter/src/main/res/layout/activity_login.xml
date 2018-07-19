@@ -6,7 +6,8 @@
     <com.doing.kotlin.baselib.ui.widget.GeneralToolbar
         android:id="@+id/mToolbar"
         style="@style/GeneralToolbarStyle"
-        app:commonTitle="登录" />
+        app:commonTitle="登录"
+        app:menu="@menu/login_menu" />
 
     <LinearLayout
         style="@style/MatchWrap.Vertical"
@@ -19,13 +20,12 @@
             android:layout_height="@dimen/common_line_height"
             android:background="@null"
             android:drawableLeft="@drawable/icon_user_name"
-            android:drawableStart="@drawable/icon_user_name"
             android:drawablePadding="@dimen/common_padding_small"
+            android:drawableStart="@drawable/icon_user_name"
             android:hint="请输入手机号码"
             android:inputType="phone"
             android:paddingLeft="@dimen/common_padding_small"
-            android:paddingStart="@dimen/common_padding_small"
-            />
+            android:paddingStart="@dimen/common_padding_small" />
 
         <View style="@style/DividerFixedHeight" />
 
@@ -35,8 +35,8 @@
             android:layout_height="@dimen/common_line_height"
             android:background="@null"
             android:drawableLeft="@drawable/icon_pwd"
-            android:drawableStart="@drawable/icon_pwd"
             android:drawablePadding="@dimen/common_padding_small"
+            android:drawableStart="@drawable/icon_pwd"
             android:hint="请输入密码"
             android:inputType="textPassword"
             android:paddingLeft="@dimen/common_padding_small"
@@ -54,8 +54,8 @@
         android:id="@+id/mTvForgetPwd"
         style="@style/WrapWrap"
         android:layout_gravity="end"
-        android:layout_marginRight="@dimen/common_margin"
         android:layout_marginEnd="@dimen/common_margin"
+        android:layout_marginRight="@dimen/common_margin"
         android:text="忘记密码？"
         android:textColor="@color/common_blue" />
 </LinearLayout>

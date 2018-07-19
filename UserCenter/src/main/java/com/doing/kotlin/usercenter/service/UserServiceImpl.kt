@@ -7,11 +7,13 @@ import io.reactivex.Flowable
 import javax.inject.Inject
 
 class UserServiceImpl @Inject constructor(): UserService {
+    override fun login(mobile: String, pwd: String): Flowable<Boolean> {
+        return UserRepository.getUserApi().login(mobile, pwd)
+                .flatMap { Flowable.just(false) }
+    }
 
     override fun register(mobile: String, pwd: String, verifyCode: String): Flowable<Boolean> {
         return UserRepository.getUserApi().register(RegisterReq(mobile, pwd, verifyCode))
-                .flatMap {
-                    Flowable.just(true)
-                }
+                .flatMap { Flowable.just(true) }
     }
 }

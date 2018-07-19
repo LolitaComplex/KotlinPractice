@@ -6,4 +6,5 @@ interface UserService {
 
     fun register(mobile: String, pwd: String, verifyCode: String): Flowable<Boolean>
 
+    fun login(mobile: String, pwd: String): Flowable<Boolean>
 }

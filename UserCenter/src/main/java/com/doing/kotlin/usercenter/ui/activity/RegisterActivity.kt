@@ -50,7 +50,7 @@ class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView, Vie
         super.initActionBar(actionBar)
         mToolbar?.setNavigationIcon(R.drawable.icon_back)
         mToolbar?.setNavigationOnClickListener {
-            ToastUtil.show("返回")
+            finish()
         }
     }
 

@@ -9,7 +9,6 @@
             android:id="@+id/mToolbar"
             style="@style/GeneralToolbarStyle"
             app:commonTitle="注册"
-            app:menu="@menu/register_menu"
             />
     </android.support.design.widget.AppBarLayout>
 

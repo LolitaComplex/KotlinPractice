@@ -12,13 +12,14 @@ class ToastUtil{
         private var mToast: Toast? = null
 
         fun show(text: String) {
-            if (mToast == null) {
-                mToast = Toast.makeText(UiUtils.getContext(), "", Toast.LENGTH_SHORT)
-            }
-
             mToast?.let {
                 it.setText(text)
                 it.show()
+            }
+
+            if (mToast == null) {
+                mToast = Toast.makeText(UiUtils.getContext(), text, Toast.LENGTH_SHORT)
+                mToast!!.show()
             }
         }
     }
