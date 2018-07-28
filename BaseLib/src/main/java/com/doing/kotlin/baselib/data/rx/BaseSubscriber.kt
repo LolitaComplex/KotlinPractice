@@ -37,11 +37,11 @@ abstract class BaseSubscriber<T>: FlowableSubscriber<T>, Subscription,
         get().request(n)
     }
 
-    override fun onNext(t: T) {
-        onSuccess(t)
+    override fun onNext(data: T) {
+        onSuccess(data)
     }
 
-    abstract fun onSuccess(t: T)
+    abstract fun onSuccess(data: T)
 
     open fun onApiError(code: Int, message: String) {}
     open fun onFailure(e: Throwable) {}

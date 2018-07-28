@@ -3,10 +3,12 @@ package com.doing.kotlin.usercenter.ui.activity
 import android.support.v7.app.ActionBar
 import android.view.MenuItem
 import android.view.View
+import com.doing.kotlin.baselib.ext.getTrimText
 import com.doing.kotlin.baselib.ext.isClickEnable
 import com.doing.kotlin.baselib.ui.activity.BaseMvpActivity
 import com.doing.kotlin.baselib.utils.ToastUtil
 import com.doing.kotlin.usercenter.R
+import com.doing.kotlin.usercenter.data.protocal.UserInfo
 import com.doing.kotlin.usercenter.injection.component.DaggerUserComponent
 import com.doing.kotlin.usercenter.injection.module.UserModule
 import com.doing.kotlin.usercenter.precenter.LoginPresenter
@@ -63,15 +65,20 @@ class LoginActivity : BaseMvpActivity<LoginPresenter>(), LoginView,  View.OnClic
         mPresenter.mView = this
     }
 
-    override fun onLoginResult() {
-
+    override fun onLoginResult(userInfo: UserInfo) {
+        ToastUtil.show(userInfo.userName)
     }
-
 
     override fun onClick(v: View) {
         when (v.id) {
-            R.id.mBtnLogin -> {}
-            R.id.mTvForgetPwd -> {}
+            R.id.mBtnLogin -> {
+                val mobile = mEtMobile.getTrimText()
+                val password = mEtPwd.getTrimText()
+                mPresenter.login(mobile, password, "")
+            }
+            R.id.mTvForgetPwd -> {
+                ToastUtil.show("啦啦啦")
+            }
         }
     }
 
