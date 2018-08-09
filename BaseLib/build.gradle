@@ -65,6 +65,8 @@ dependencies {
 
     api commonDependencies.rxlifecycleKotlin
     api commonDependencies.rxlifecycleComponents
+
+    api commonDependencies.takePhoto
 }
 
 repositories {

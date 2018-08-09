@@ -20,7 +20,7 @@ class AppRetrofitFactory : RetrofitFactory(){
             }
         }
 
-        builder.addConverterFactory(SpecialGsonConverterFactory.create(GsonManager.sIntance.mGson))
+        builder.addConverterFactory(SpecialJsonConverterFactory.create(JsonManager.sInstance.mJson))
         return builder.build()
     }
 }

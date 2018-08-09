@@ -3,7 +3,7 @@ package com.doing.kotlin.usercenter.ui.activity
 import android.support.v7.app.ActionBar
 import android.view.View
 import com.doing.kotlin.baselib.ext.getTrimText
-import com.doing.kotlin.baselib.ext.isClickEnable
+import com.doing.kotlin.baselib.ext.setClickEnable
 import com.doing.kotlin.baselib.ui.activity.BaseMvpActivity
 import com.doing.kotlin.baselib.utils.ToastUtil
 import com.doing.kotlin.baselib.utils.toast
@@ -38,7 +38,7 @@ class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView, Vie
             }
         })
 
-        mBtnRegister.isClickEnable(mEtMobile, mEtVerifyCode,
+        mBtnRegister.setClickEnable(mEtMobile, mEtVerifyCode,
                 mEtPwd, mEtPwdConfirm, enableMethod = ::isEnable)
 
         mBtnVerifyCode.setOnClickListener(this)
@@ -47,7 +47,6 @@ class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView, Vie
     }
 
     override fun initActionBar(actionBar: ActionBar) {
-        super.initActionBar(actionBar)
         mToolbar?.setNavigationIcon(R.drawable.icon_back)
         mToolbar?.setNavigationOnClickListener {
             finish()

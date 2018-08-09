@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/MatchWrap.Vertical"
+    android:padding="15dp">
+
+    <LinearLayout
+        style="@style/MatchWrap.Vertical"
+        android:background="@drawable/shape_rectangle_radius"
+        android:divider="@drawable/shape_line"
+        android:showDividers="middle">
+
+        <TextView
+            android:id="@+id/mTvTakePhoto"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:foreground="?android:selectableItemBackground"
+            android:gravity="center"
+            android:text="拍照"
+            android:textColor="@color/common_blue"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/mTvAlbum"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:foreground="?android:selectableItemBackground"
+            android:gravity="center"
+            android:text="相册"
+            android:textColor="@color/common_blue"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/mTvCancel"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/shape_rectangle_radius"
+        android:foreground="?android:selectableItemBackground"
+        android:gravity="center"
+        android:text="取消"
+        android:textColor="@color/common_red"
+        android:textSize="20sp" />
+</LinearLayout>
+

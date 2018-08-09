@@ -9,11 +9,11 @@ import android.widget.ImageView
 import com.doing.kotlin.baselib.R
 import org.jetbrains.anko.find
 
-class ProgressDialogFragment : BaseDialogFragment() {
+class ProgressDialog : BaseDialog() {
 
     companion object {
-        fun newInstance(): ProgressDialogFragment {
-            return ProgressDialogFragment()
+        fun newInstance(): ProgressDialog {
+            return ProgressDialog()
         }
     }
 

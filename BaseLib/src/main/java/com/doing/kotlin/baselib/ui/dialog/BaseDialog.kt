@@ -10,7 +10,7 @@ import android.support.v4.app.FragmentManager
 import android.view.*
 import com.doing.kotlin.baselib.R
 
-abstract class BaseDialogFragment : DialogFragment(){
+abstract class BaseDialog : DialogFragment(){
 
     var mOnKeyListener: (() -> Unit)? = null
 

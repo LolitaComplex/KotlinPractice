@@ -8,7 +8,6 @@ import android.os.Handler
 import android.support.annotation.ColorInt
 import android.support.v4.app.DialogFragment
 import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AlertDialog
 import android.text.TextUtils
 import android.widget.TextView
@@ -16,7 +15,7 @@ import com.doing.kotlin.baselib.utils.UiUtils
 import com.doing.kotlin.baselib.R
 
 
-class NormalDialogFragment : DialogFragment(){
+class NormalDialog : DialogFragment(){
 
     private var mTitle: String? = null
     private var mMessage: String? = null
@@ -30,15 +29,15 @@ class NormalDialogFragment : DialogFragment(){
     var mPositiveListener: ((dialog: DialogInterface , witch: Int) -> Unit)? = null
 
     companion object {
-        fun newInstance(title: String?, message: String?, positiveText: String): NormalDialogFragment {
-            return NormalDialogFragment().apply {
+        fun newInstance(title: String?, message: String?, positiveText: String): NormalDialog {
+            return NormalDialog().apply {
                 init(title, message, positiveText, "")
             }
         }
 
         fun newInstance(title: String?, message: String?, positiveText: String, navigationText: String):
-                NormalDialogFragment {
-            return NormalDialogFragment().apply {
+                NormalDialog {
+            return NormalDialog().apply {
                 init(title, message, positiveText, navigationText)
             }
         }

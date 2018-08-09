@@ -9,28 +9,28 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.lang.reflect.Type
 
-class SpecialGsonConverterFactory private constructor(val mGson: Gson): Converter.Factory() {
+class SpecialJsonConverterFactory private constructor(private val mJson: Gson): Converter.Factory() {
 
     companion object {
-        fun create(gson: Gson): SpecialGsonConverterFactory {
-            return SpecialGsonConverterFactory(gson)
+        fun create(json: Gson): SpecialJsonConverterFactory {
+            return SpecialJsonConverterFactory(json)
         }
 
-        fun create() : SpecialGsonConverterFactory {
+        fun create() : SpecialJsonConverterFactory {
             return create(GsonBuilder().create())
         }
     }
 
-    private val mGsonConverterFactory: GsonConverterFactory = GsonConverterFactory.create(mGson)
+    private val mJsonConverterFactory: GsonConverterFactory = GsonConverterFactory.create(mJson)
 
     override fun responseBodyConverter(type: Type, annotations: Array<Annotation>,
                                        retrofit: Retrofit): Converter<ResponseBody, *> {
-        return ApiResponseConverter<Any>(mGson, type)
+        return ApiResponseConverter<Any>(mJson, type)
     }
 
     override fun requestBodyConverter(type: Type,
                                       parameterAnnotations: Array<Annotation>,
                                       methodAnnotations: Array<Annotation>, retrofit: Retrofit): Converter<*, RequestBody>? {
-        return mGsonConverterFactory.requestBodyConverter(type, parameterAnnotations, methodAnnotations, retrofit)
+        return mJsonConverterFactory.requestBodyConverter(type, parameterAnnotations, methodAnnotations, retrofit)
     }
 }

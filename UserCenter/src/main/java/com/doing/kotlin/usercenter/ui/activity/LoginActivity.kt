@@ -4,7 +4,7 @@ import android.support.v7.app.ActionBar
 import android.view.MenuItem
 import android.view.View
 import com.doing.kotlin.baselib.ext.getTrimText
-import com.doing.kotlin.baselib.ext.isClickEnable
+import com.doing.kotlin.baselib.ext.setClickEnable
 import com.doing.kotlin.baselib.ui.activity.BaseMvpActivity
 import com.doing.kotlin.baselib.utils.ToastUtil
 import com.doing.kotlin.usercenter.R
@@ -31,14 +31,13 @@ class LoginActivity : BaseMvpActivity<LoginPresenter>(), LoginView,  View.OnClic
     override fun initView() {
         mToolbar = find(R.id.mToolbar)
 
-        mBtnLogin.isClickEnable(mEtMobile, mEtPwd, enableMethod = ::isEnable)
+        mBtnLogin.setClickEnable(mEtMobile, mEtPwd, enableMethod = ::isEnable)
 
         mBtnLogin.setOnClickListener(this)
         mTvForgetPwd.setOnClickListener(this)
     }
 
     override fun initActionBar(actionBar: ActionBar) {
-        super.initActionBar(actionBar)
         mToolbar?.setNavigationIcon(R.drawable.icon_back)
         mToolbar?.setNavigationOnClickListener {
             ToastUtil.show("返回")
@@ -66,7 +65,7 @@ class LoginActivity : BaseMvpActivity<LoginPresenter>(), LoginView,  View.OnClic
     }
 
     override fun onLoginResult(userInfo: UserInfo) {
-        ToastUtil.show(userInfo.userName)
+        startActivity<UserInfoActivity>()
     }
 
     override fun onClick(v: View) {
@@ -77,12 +76,12 @@ class LoginActivity : BaseMvpActivity<LoginPresenter>(), LoginView,  View.OnClic
                 mPresenter.login(mobile, password, "")
             }
             R.id.mTvForgetPwd -> {
-                ToastUtil.show("啦啦啦")
+                startActivity<ForgetPasswordActivity>()
             }
         }
     }
 
     private fun isEnable(): Boolean{
-        return mEtMobile.text.isNotEmpty() && mEtPwd.text.isNotEmpty()
+        return mEtMobile.getTrimText().isNotEmpty() && mEtMobile.getTrimText().isNotEmpty()
     }
 }

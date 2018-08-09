@@ -1,8 +1,6 @@
 package com.doing.kotlin.usercenter.data.api
 
-import com.doing.kotlin.usercenter.data.protocal.LoginReq
-import com.doing.kotlin.usercenter.data.protocal.RegisterReq
-import com.doing.kotlin.usercenter.data.protocal.UserInfo
+import com.doing.kotlin.usercenter.data.protocal.*
 import io.reactivex.Flowable
 import retrofit2.http.*
 
@@ -13,5 +11,11 @@ interface UserApi {
 
     @POST("userCenter/login")
     fun login(@Body body: LoginReq): Flowable<UserInfo>
+
+    @POST("userCenter/forgetPwd")
+    fun forgetPwd(@Body body: ForgetPasswordReq): Flowable<String>
+
+    @POST("userCenter/resetPwd")
+    fun resetPwd(@Body body: ResetPasswordReq): Flowable<String>
 
 }

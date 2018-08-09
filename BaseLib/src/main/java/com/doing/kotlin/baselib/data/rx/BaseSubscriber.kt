@@ -2,6 +2,7 @@ package com.doing.kotlin.baselib.data.rx
 
 import android.util.Log
 import com.doing.kotlin.baselib.common.BaseConstant
+import com.doing.kotlin.baselib.utils.ToastUtil
 import com.google.gson.JsonSyntaxException
 import io.reactivex.FlowableSubscriber
 import io.reactivex.exceptions.Exceptions
@@ -44,7 +45,9 @@ abstract class BaseSubscriber<T>: FlowableSubscriber<T>, Subscription,
     abstract fun onSuccess(data: T)
 
     open fun onApiError(code: Int, message: String) {}
-    open fun onFailure(e: Throwable) {}
+    open fun onFailure(e: Throwable) {
+        ToastUtil.show("网络错误")
+    }
     override fun onComplete() {}
 
     override fun onError(e: Throwable) {

@@ -38,7 +38,7 @@ fun EditText.getTrimText(): String {
     return this.text.toString().trim()
 }
 
-fun Button.isClickEnable(vararg edits: TextView, enableMethod: () -> Boolean) {
+fun Button.setClickEnable(vararg edits: TextView, enableMethod: () -> Boolean) {
     val button = this
     for (edit in edits) {
         edit.addTextChangedListener(object: SimpleTextWatcher(){

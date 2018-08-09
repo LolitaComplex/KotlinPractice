@@ -6,18 +6,18 @@ import com.google.gson.reflect.TypeToken
 import java.lang.reflect.Type
 import java.util.ArrayList
 
-class GsonManager private constructor(){
+class JsonManager private constructor(){
 
     companion object {
-        val sIntance: GsonManager by lazy{ GsonManager() }
+        val sInstance: JsonManager by lazy{ JsonManager() }
     }
 
-    val mGson: Gson
+    val mJson: Gson
 
     init {
         val builder = GsonBuilder()
         builder.registerTypeAdapterFactory(SpecialTypeAdapterFactory())
-        mGson = builder.create()
+        mJson = builder.create()
     }
 
     internal class SpecialTypeAdapterFactory : TypeAdapterFactory {
@@ -47,10 +47,10 @@ class GsonManager private constructor(){
             @Throws(JsonParseException::class)
             override fun deserialize(json: JsonElement, typeOfT: Type,
                                      context: JsonDeserializationContext): T? {
-                try {
-                    return mJsonParser.fromJson<T>(json, typeOfT)
+                return try {
+                    mJsonParser.fromJson<T>(json, typeOfT)
                 } catch (e: Exception) {
-                    return null
+                    null
                 }
             }
         }

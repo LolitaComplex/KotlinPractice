@@ -12,7 +12,7 @@ import com.doing.kotlin.baselib.injection.module.ActivityModule
 import com.doing.kotlin.baselib.injection.module.LifecycleProviderModule
 import com.doing.kotlin.baselib.presenter.BasePresenter
 import com.doing.kotlin.baselib.presenter.view.BaseView
-import com.doing.kotlin.baselib.ui.dialog.ProgressDialogFragment
+import com.doing.kotlin.baselib.ui.dialog.ProgressDialog
 import com.doing.kotlin.baselib.ui.widget.GeneralToolbar
 import javax.inject.Inject
 
@@ -28,7 +28,7 @@ abstract class BaseMvpActivity<T: BasePresenter<*>> : BaseActivity(), BaseView {
     // ============== 通用成员 ==================
     protected var mToolbar: GeneralToolbar? = null
 
-    private lateinit var mLoadProgressDialog: ProgressDialogFragment
+    private lateinit var mLoadProgressDialog: ProgressDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,11 +49,10 @@ abstract class BaseMvpActivity<T: BasePresenter<*>> : BaseActivity(), BaseView {
             initActionBar(supportActionBar!!)
         }
 
-
-        mLoadProgressDialog = ProgressDialogFragment.newInstance()
+        mLoadProgressDialog = ProgressDialog.newInstance()
     }
 
-    // Toolbar相关的方法
+    // ============== GeneralToolbar相关的方法 ==================
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         mToolbar?.let {
             menuInflater.inflate(it.mMenuId, menu)
@@ -78,8 +77,5 @@ abstract class BaseMvpActivity<T: BasePresenter<*>> : BaseActivity(), BaseView {
     protected abstract fun injection()
     protected abstract fun initView()
 
-    protected open fun initActionBar(actionBar: ActionBar) {
-
-    }
-
+    protected open fun initActionBar(actionBar: ActionBar) {}
 }

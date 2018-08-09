@@ -11,7 +11,7 @@ import org.json.JSONObject
 import retrofit2.Converter
 import java.lang.reflect.Type
 
-class ApiResponseConverter<T>(val gson: Gson, val type: Type) : Converter<ResponseBody, T> {
+class ApiResponseConverter<T>(private val json: Gson, val type: Type) : Converter<ResponseBody, T> {
 
     override fun convert(value: ResponseBody): T? {
         val json = value.string()
@@ -30,7 +30,7 @@ class ApiResponseConverter<T>(val gson: Gson, val type: Type) : Converter<Respon
     private fun dealResult(status: Int, jsonObject: JSONObject): T?  {
         return if (status == 0) {
             val data = jsonObject.getJSONObject("data")
-            gson.fromJson<T>(data.toString(), this.type)
+            json.fromJson<T>(data.toString(), this.type)
         } else {
             val message = jsonObject.getString("message")
             throw ApiException(status, message)

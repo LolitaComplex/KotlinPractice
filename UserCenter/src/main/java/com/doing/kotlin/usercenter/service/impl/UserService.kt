@@ -8,4 +8,8 @@ interface UserService {
     fun register(mobile: String, pwd: String, verifyCode: String): Flowable<Boolean>
 
     fun login(mobile: String, pwd: String, pushId: String): Flowable<UserInfo>
+
+    fun forgetPwd(mobile: String, verifyCode: String): Flowable<Boolean>
+
+    fun resetPwd(mobile: String, password: String): Flowable<Boolean>
 }
