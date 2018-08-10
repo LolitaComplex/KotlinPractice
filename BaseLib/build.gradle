@@ -67,6 +67,7 @@ dependencies {
     api commonDependencies.rxlifecycleComponents
 
     api commonDependencies.takePhoto
+    api commonDependencies.qiniuSave
 }
 
 repositories {

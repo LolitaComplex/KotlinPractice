@@ -18,5 +18,4 @@ interface UserComponent {
 
     fun inject(activity: ResetPasswordActivity)
 
-    fun inject(activity: UserInfoActivity)
 }

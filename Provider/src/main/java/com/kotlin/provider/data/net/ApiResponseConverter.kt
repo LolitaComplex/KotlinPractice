@@ -11,6 +11,7 @@ import org.json.JSONObject
 import retrofit2.Converter
 import java.lang.reflect.Type
 
+@Suppress("UNCHECKED_CAST")
 class ApiResponseConverter<T>(private val json: Gson, val type: Type) : Converter<ResponseBody, T> {
 
     override fun convert(value: ResponseBody): T? {
@@ -29,8 +30,17 @@ class ApiResponseConverter<T>(private val json: Gson, val type: Type) : Converte
 
     private fun dealResult(status: Int, jsonObject: JSONObject): T?  {
         return if (status == 0) {
-            val data = jsonObject.getJSONObject("data")
-            json.fromJson<T>(data.toString(), this.type)
+            when {
+                type.toString().contains("String") -> jsonObject.getString("data") as T
+                type.toString().contains("List") -> {
+                    val data = jsonObject.getJSONArray("data")
+                    json.fromJson<T>(data.toString(), this.type)
+                }
+                else -> {
+                    val data = jsonObject.getJSONObject("data")
+                    json.fromJson<T>(data.toString(), this.type)
+                }
+            }
         } else {
             val message = jsonObject.getString("message")
             throw ApiException(status, message)

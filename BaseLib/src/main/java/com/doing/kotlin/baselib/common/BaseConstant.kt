@@ -8,4 +8,6 @@ object BaseConstant{
 
     const val HOST = "http://todayismonday.cn/Kotlin_Server/"
 
+    const val IMAGE_SERVER_ADDRESS = "http://osea2fxp7.bkt.clouddn.com/"
+
 }

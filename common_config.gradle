@@ -121,7 +121,10 @@ ext {
             pageFlip               : "com.github.eschao:android-PageFlip:1.0.2",
 
             //节操视频
-            jiecaoVideo            : "fm.jiecao:jiecaovideoplayer:5.8.1"
+            jiecaoVideo            : "fm.jiecao:jiecaovideoplayer:5.8.1",
+
+            //七牛云存储
+            qiniuSave              : "com.qiniu:qiniu-android-sdk:7.3.+"
     ]
 
 

@@ -20,14 +20,11 @@ import com.bumptech.glide.module.AppGlideModule
 class BaseGlideModule : AppGlideModule() {
 
     override fun applyOptions(context: Context, builder: GlideBuilder) {
-        val availableSize = DiskUtils.sdAvialableSize
-        //        long availableSize = 1024 * 1024 * 200;
-        val diskCacheSize = if (availableSize > 500 * C.M)
-            250 * C.M
-        else
-            availableSize / 2
+//        val availableSize = DiskUtils.sdAvialableSize
+        val availableSize = 1024 * 1024 * 200
+        val diskCacheSize = availableSize / 2
         val memoryCacheSize = Runtime.getRuntime().maxMemory() / 8
-        builder.setDiskCache(InternalCacheDiskCacheFactory(context, diskCacheSize))
+        builder.setDiskCache(InternalCacheDiskCacheFactory(context, diskCacheSize.toLong()))
                 .setMemoryCache(LruResourceCache(memoryCacheSize))
                 .setBitmapPool(LruBitmapPool(memoryCacheSize / 2))
     }
