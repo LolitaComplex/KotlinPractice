@@ -1,5 +1,6 @@
 package com.doing.kotlin.baselib.data.image
 
+import android.content.Context
 import android.content.res.Resources
 import android.graphics.*
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool
@@ -14,7 +15,10 @@ import java.security.MessageDigest
  * @since 2017-03-13.
  */
 
-class GlideRoundTransform(radiusDp: Float) : BitmapTransformation() {
+class GlideRoundTransform(context: Context, radiusDp: Float): BitmapTransformation(context) {
+    override fun getId(): String {
+        return "GlideRoundTransform"
+    }
 
     private val mRadius: Float = Resources.getSystem().displayMetrics.density * radiusDp
 
@@ -35,7 +39,4 @@ class GlideRoundTransform(radiusDp: Float) : BitmapTransformation() {
         return result
     }
 
-    override fun updateDiskCacheKey(messageDigest: MessageDigest) {
-
-    }
 }
