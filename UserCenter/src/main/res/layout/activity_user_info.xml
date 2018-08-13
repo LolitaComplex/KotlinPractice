@@ -33,8 +33,9 @@
             android:layout_width="@dimen/common_icon_width"
             android:layout_height="@dimen/common_icon_height"
             android:layout_centerVertical="true"
-            android:layout_marginRight="20dp"
+            android:layout_marginRight="20.0dip"
             android:layout_toLeftOf="@id/mIvArrow"
+            android:scaleType="centerCrop"
             android:src="@drawable/icon_default_user" />
     </RelativeLayout>
 
