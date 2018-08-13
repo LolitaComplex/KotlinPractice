@@ -155,6 +155,7 @@ class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), TakePhoto.TakeRes
     }
 
     override fun onGetUploadTokenResult(token: String) {
+
         mUploadManager.put(mUploadFile, null, token, { _, _, response ->
             ImageUtils.setCircleUrl(mIvUserIcon, BaseConstant.IMAGE_SERVER_ADDRESS +
                     response?.getString("hash"), R.drawable.icon_default_user)

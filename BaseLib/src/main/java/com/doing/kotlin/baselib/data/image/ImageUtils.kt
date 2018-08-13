@@ -1,14 +1,18 @@
 package com.doing.kotlin.baselib.data.image
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.util.SparseArray
 import android.widget.ImageView
+import com.bumptech.glide.load.Transformation
 import com.bumptech.glide.load.engine.bitmap_recycle.LruBitmapPool
 import com.bumptech.glide.load.engine.cache.DiskCache
 import com.bumptech.glide.load.engine.cache.LruResourceCache
 import com.bumptech.glide.load.engine.cache.MemoryCache
 import com.bumptech.glide.load.engine.cache.MemorySizeCalculator
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import java.io.File
@@ -104,17 +108,17 @@ object ImageUtils {
     }
 
     fun setCircleUrl(imageView: ImageView, url: String) {
-        val transformation = getCircleBitmapTransform()
+        val transformation = CircleCrop()
         setUrl(imageView, url, 0, 0, transformation, 0)
     }
 
     fun setCircleUrl(imageView: ImageView, url: String, placeholderImg: Int) {
-        val transformation = getCircleBitmapTransform()
+        val transformation = CircleCrop()
         setUrl(imageView, url, 0, 0, transformation, placeholderImg)
     }
 
     fun setCircleUrl(imageView: ImageView, url: String, width: Int, height: Int) {
-        val transformation = getCircleBitmapTransform()
+        val transformation = CircleCrop()
         setUrl(imageView, url, width, height, transformation, 0)
     }
 
@@ -135,15 +139,14 @@ object ImageUtils {
 
         val request = GlideApp.with(imageView)
                 .load(sizeUrl)
-                .apply(options)
                 .transition(DrawableTransitionOptions.withCrossFade())
 
 
         if (transformation != null) {
-            request.transform(transformation)
+            options.transform(transformation)
         }
 
-        request.into(imageView)
+        request.apply(options).into(imageView)
     }
 
     fun setResId(imageView: ImageView, resId: Int) {
@@ -155,7 +158,7 @@ object ImageUtils {
     }
 
     fun setCircleResId(imageView: ImageView, resId: Int) {
-        setResId(imageView, resId, getCircleBitmapTransform())
+        setResId(imageView, resId, CenterCrop())
     }
 
     private fun setResId(imageView: ImageView, resId: Int, transformation: BitmapTransformation?) {
@@ -164,7 +167,7 @@ object ImageUtils {
                 .transition(DrawableTransitionOptions.withCrossFade())
 
         if (transformation != null) {
-            request.transform(transformation)
+            request.apply(RequestOptions().transform(transformation))
         }
 
         request.into(imageView)
@@ -179,16 +182,16 @@ object ImageUtils {
     }
 
     fun setCircleFilePath(imageView: ImageView, filePath: String) {
-        setFilePath(imageView, filePath, getCircleBitmapTransform())
+        setFilePath(imageView, filePath, CenterCrop())
     }
 
-    private fun setFilePath(imageView: ImageView, filepath: String, transformation: BitmapTransformation?) {
+    private fun setFilePath(imageView: ImageView, filepath: String, transformation: Transformation<Bitmap>?) {
         val builder = GlideApp.with(imageView.context)
                 .load(filepath)
                 .transition(DrawableTransitionOptions.withCrossFade())
 
         if (transformation != null) {
-            builder.transform(transformation)
+            builder.apply(RequestOptions().transform(transformation))
         }
 
         builder.into(imageView)
