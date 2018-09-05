@@ -39,7 +39,7 @@ class JsonManager private constructor(){
                     break
                 }
             }
-            return TreeTypeAdapter(null, deserializer, gson, type, this)
+            return TreeTypeAdapter<T>(null, deserializer, gson, type, this)
         }
 
         private inner class SpecialAdapter<T> : JsonDeserializer<T> {
