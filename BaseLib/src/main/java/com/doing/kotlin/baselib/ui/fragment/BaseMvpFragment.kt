@@ -1,10 +1,7 @@
-package com.doing.kotlin.baselib.ui.activity
+package com.doing.kotlin.baselib.ui.fragment
 
+import android.app.Activity
 import android.content.Context
-import android.os.Bundle
-import android.support.annotation.LayoutRes
-import android.support.v7.app.ActionBar
-import android.view.Menu
 import com.doing.kotlin.baselib.common.BaseApplication
 import com.doing.kotlin.baselib.injection.component.ActivityComponent
 import com.doing.kotlin.baselib.injection.component.DaggerActivityComponent
@@ -13,10 +10,9 @@ import com.doing.kotlin.baselib.injection.module.LifecycleProviderModule
 import com.doing.kotlin.baselib.presenter.BasePresenter
 import com.doing.kotlin.baselib.presenter.view.BaseView
 import com.doing.kotlin.baselib.ui.dialog.ProgressDialog
-import com.doing.kotlin.baselib.ui.widget.GeneralToolbar
 import javax.inject.Inject
 
-abstract class BaseMvpActivity<T: BasePresenter<*>> : BaseActivity(), BaseView {
+abstract class BaseMvpFragment<T : BasePresenter<*>> : BaseFragment(), BaseView {
 
     // ============== 注入相关 ==================
     protected lateinit var mActivityComponent: ActivityComponent
@@ -25,25 +21,25 @@ abstract class BaseMvpActivity<T: BasePresenter<*>> : BaseActivity(), BaseView {
     @Inject
     protected lateinit var mContext: Context
 
-
     private lateinit var mLoadProgressDialog: ProgressDialog
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        val appComponent = (context.applicationContext as BaseApplication).mAppComponent
+
         mActivityComponent = DaggerActivityComponent.builder()
-                .appComponent((application as BaseApplication).mAppComponent)
-                .activityModule(ActivityModule(this))
+                .appComponent(appComponent)
+                .activityModule(ActivityModule(context as Activity))
                 .lifecycleProviderModule(LifecycleProviderModule(this))
                 .build()
 
         mLoadProgressDialog = ProgressDialog.newInstance()
-
-        super.onCreate(savedInstanceState)
     }
 
 
-    // ============== 功能性方法 ==================
     override fun showLoading() {
-        mLoadProgressDialog.show(supportFragmentManager)
+        mLoadProgressDialog.show(fragmentManager)
     }
 
     override fun hiddenLoading() {
@@ -51,6 +47,4 @@ abstract class BaseMvpActivity<T: BasePresenter<*>> : BaseActivity(), BaseView {
     }
 
     override fun onError() {}
-
-
 }
