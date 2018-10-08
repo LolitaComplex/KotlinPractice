@@ -1,10 +1,12 @@
 package com.doing.kotlin.baselib.data.rx
 
 import android.util.Log
-import com.doing.kotlin.baselib.common.BaseConstant
+import com.doing.kotlin.baselib.common.AppConfig
 import com.doing.kotlin.baselib.utils.ToastUtil
 import com.google.gson.JsonSyntaxException
 import io.reactivex.FlowableSubscriber
+import io.reactivex.SingleObserver
+import io.reactivex.disposables.Disposable
 import io.reactivex.exceptions.Exceptions
 import io.reactivex.internal.operators.flowable.FlowableInternalHelper
 import io.reactivex.internal.subscriptions.SubscriptionHelper
@@ -12,9 +14,12 @@ import org.reactivestreams.Subscription
 import java.util.concurrent.atomic.AtomicReference
 
 abstract class BaseSubscriber<T>: FlowableSubscriber<T>, Subscription,
-        AtomicReference<Subscription>() {
+        AtomicReference<Subscription>(), SingleObserver<T> {
 
     protected lateinit var mSubscription: Subscription
+
+    override fun onSubscribe(d: Disposable) {
+    }
 
     override fun onSubscribe(s: Subscription) {
         if (SubscriptionHelper.setOnce(this, s)) {
@@ -42,8 +47,9 @@ abstract class BaseSubscriber<T>: FlowableSubscriber<T>, Subscription,
         onSuccess(data)
     }
 
-    abstract fun onSuccess(data: T)
-
+    override fun onSuccess(data: T){
+        Log.i(AppConfig.Constant.NET_JSON_TAG, "Data：${data.toString()}")
+    }
     open fun onApiError(code: Int, message: String) {}
     open fun onFailure(e: Throwable) {
         ToastUtil.show("网络错误")
@@ -53,15 +59,15 @@ abstract class BaseSubscriber<T>: FlowableSubscriber<T>, Subscription,
     override fun onError(e: Throwable) {
         when (e) {
             is ApiException -> {
-                Log.i(BaseConstant.NET_JSON_TAG, "Code：${e.mCode} \t Message：${e.mMessage}")
+                Log.i(AppConfig.Constant.NET_JSON_TAG, "Code：${e.mCode} \t Message：${e.mMessage}")
                 onApiError(e.mCode, e.mMessage)
             }
             is JsonSyntaxException -> {
-                Log.w(BaseConstant.NET_JSON_TAG, e.message)
+                Log.w(AppConfig.Constant.NET_JSON_TAG, e.message)
                 onFailure(e)
             }
             else -> {
-                Log.w(BaseConstant.NET_JSON_TAG, e.message, e)
+                Log.w(AppConfig.Constant.NET_JSON_TAG, e.message, e)
                 onFailure(e)
             }
         }

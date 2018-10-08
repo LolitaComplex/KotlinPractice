@@ -1,7 +1,7 @@
-package com.kotlin.provider.data.net
+package com.doing.kotlin.baselib.data.net
 
 import android.util.Log
-import com.doing.kotlin.baselib.common.BaseConstant
+import com.doing.kotlin.baselib.common.AppConfig
 import com.doing.kotlin.baselib.data.rx.ApiException
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
@@ -16,7 +16,7 @@ class ApiResponseConverter<T>(private val json: Gson, val type: Type) : Converte
 
     override fun convert(value: ResponseBody): T? {
         val json = value.string()
-        Log.i(BaseConstant.NET_JSON_TAG, json)
+        Log.i(AppConfig.Constant.NET_JSON_TAG, json)
         val jObject = JSONObject(json)
         return try {
             val status = jObject.getInt("status")

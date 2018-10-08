@@ -1,4 +1,4 @@
-package com.kotlin.provider.data.net
+package com.doing.kotlin.baselib.data.net
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder

@@ -1,6 +1,6 @@
 package com.doing.kotlin.baselib.data.net
 
-import com.doing.kotlin.baselib.common.BaseConstant
+import com.doing.kotlin.baselib.common.AppConfig
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -10,10 +10,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 open class RetrofitFactory{
-
-    companion object {
-        val sInstance: RetrofitFactory by lazy{ RetrofitFactory() }
-    }
 
     protected val mRetrofit: Retrofit
     protected val mInterceptor: Interceptor
@@ -25,6 +21,7 @@ open class RetrofitFactory{
                     .newBuilder()
                     .addHeader("Content-Type", "application/json")
                     .addHeader("charset", "utf-8")
+//                    .addHeader("token",  AppPrefsUtils.getString())
                     .build()
                     .let {
                         chain.proceed(it)
@@ -38,7 +35,7 @@ open class RetrofitFactory{
 
     protected open fun initRetrofit(): Retrofit {
         return Retrofit.Builder()
-                .baseUrl(BaseConstant.HOST)
+                .baseUrl(AppConfig.Constant.HOST)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(mOkHttpClient)

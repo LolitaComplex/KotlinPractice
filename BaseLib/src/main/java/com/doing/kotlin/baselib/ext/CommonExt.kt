@@ -10,28 +10,68 @@ import com.doing.kotlin.baselib.utils.NetWorkUtils
 import com.doing.kotlin.baselib.utils.ToastUtil
 import com.trello.rxlifecycle2.LifecycleProvider
 import io.reactivex.Flowable
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-fun <T> Flowable<T>.execute(subscriber: BaseSubscriber<T>, provider: LifecycleProvider<*>) {
+fun <T> Single<T>.execute(subscriber: BaseSubscriber<T>) {
+    executeAndShowProgress(subscriber, null, null)
+}
+
+fun <T> Single<T>.execute(subscriber: BaseSubscriber<T>, provider: LifecycleProvider<*>?) {
     executeAndShowProgress(subscriber, provider, null)
 }
 
-fun <T> Flowable<T>.executeAndShowProgress(subscriber: BaseSubscriber<T>, provider: LifecycleProvider<*>, baseView: BaseView?) {
-    this.compose(provider.bindToLifecycle())
-        .subscribeOn(Schedulers.io())
-        .doOnSubscribe {
-            if (!NetWorkUtils.isNetWorkAvailable()) {
-                ToastUtil.show("网络不可用")
-                it.cancel()
-            } else {
-                baseView?.showLoading()
+fun <T> Single<T>.executeAndShowProgress(subscriber: BaseSubscriber<T>, provider: LifecycleProvider<*>?, baseView: BaseView?) {
+    val compose = if (provider != null) {
+        this.compose(provider.bindToLifecycle())
+    } else {
+        this
+    }
+
+    compose.subscribeOn(Schedulers.io())
+            .doOnSubscribe {
+                if (!NetWorkUtils.isNetWorkAvailable()) {
+                    ToastUtil.show("网络不可用")
+                    it.dispose()
+                } else {
+                    baseView?.showLoading()
+                }
             }
-        }
-        .subscribeOn(AndroidSchedulers.mainThread())
-        .doFinally { baseView?.hiddenLoading() }
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(subscriber)
+            .subscribeOn(AndroidSchedulers.mainThread())
+            .doFinally { baseView?.hiddenLoading() }
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(subscriber)
+}
+
+fun <T> Flowable<T>.execute(subscriber: BaseSubscriber<T>) {
+    executeAndShowProgress(subscriber, null, null)
+}
+
+fun <T> Flowable<T>.execute(subscriber: BaseSubscriber<T>, provider: LifecycleProvider<*>?) {
+    executeAndShowProgress(subscriber, provider, null)
+}
+
+fun <T> Flowable<T>.executeAndShowProgress(subscriber: BaseSubscriber<T>, provider: LifecycleProvider<*>?, baseView: BaseView?) {
+    val compose = if (provider != null) {
+        this.compose(provider.bindToLifecycle())
+    } else {
+        this
+    }
+
+    compose.subscribeOn(Schedulers.io())
+            .doOnSubscribe {
+                if (!NetWorkUtils.isNetWorkAvailable()) {
+                    ToastUtil.show("网络不可用")
+                    it.cancel()
+                } else {
+                    baseView?.showLoading()
+                }
+            }
+            .subscribeOn(AndroidSchedulers.mainThread())
+            .doFinally { baseView?.hiddenLoading() }
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(subscriber)
 }
 
 fun EditText.getTrimText(): String {

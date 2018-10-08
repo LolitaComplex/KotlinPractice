@@ -24,6 +24,7 @@
             android:drawableStart="@drawable/icon_user_name"
             android:hint="请输入手机号码"
             android:inputType="phone"
+            android:text="13581504173"
             android:paddingLeft="@dimen/common_padding_small"
             android:paddingStart="@dimen/common_padding_small" />
 
@@ -38,6 +39,7 @@
             android:drawablePadding="@dimen/common_padding_small"
             android:drawableStart="@drawable/icon_pwd"
             android:hint="请输入密码"
+            android:text="123456"
             android:inputType="textPassword"
             android:paddingLeft="@dimen/common_padding_small"
             android:paddingStart="@dimen/common_padding_small"

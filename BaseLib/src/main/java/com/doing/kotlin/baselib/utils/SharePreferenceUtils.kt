@@ -3,13 +3,14 @@ package com.doing.kotlin.baselib.utils
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.SharedPreferences.Editor
-import com.doing.kotlin.baselib.common.BaseConstant
+import com.doing.kotlin.baselib.common.AppConfig
 
 /*
     SP工具类
  */
 object AppPrefsUtils {
-    private var sharePreference: SharedPreferences = UiUtils.getContext().getSharedPreferences(BaseConstant.TABLE_PREFS, Context.MODE_PRIVATE)
+    private var sharePreference: SharedPreferences = UiUtils.getContext()
+            .getSharedPreferences(AppConfig.Constant.TABLE_PREFS, Context.MODE_PRIVATE)
     private var editor: Editor
 
     init {

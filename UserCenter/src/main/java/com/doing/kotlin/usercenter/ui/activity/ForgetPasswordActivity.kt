@@ -15,8 +15,6 @@ import kotlinx.android.synthetic.main.activity_forget_pwd.*
 import org.jetbrains.anko.find
 import org.jetbrains.anko.startActivity
 
-private val s = "mobile"
-
 class ForgetPasswordActivity : BaseMvpActivity<ForgetPasswordPresenter>(), ForgetPasswordView {
 
     companion object {

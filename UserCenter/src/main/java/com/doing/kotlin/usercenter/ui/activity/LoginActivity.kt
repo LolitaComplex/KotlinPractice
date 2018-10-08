@@ -1,8 +1,13 @@
 package com.doing.kotlin.usercenter.ui.activity
 
 import android.support.v7.app.ActionBar
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import com.doing.kotlin.baselib.common.AppConfig
+import com.doing.kotlin.baselib.data.db.User
+import com.doing.kotlin.baselib.data.rx.BaseSubscriber
+import com.doing.kotlin.baselib.ext.execute
 import com.doing.kotlin.baselib.ext.getTrimText
 import com.doing.kotlin.baselib.ext.setClickEnable
 import com.doing.kotlin.baselib.ui.activity.BaseMvpActivity
@@ -65,7 +70,11 @@ class LoginActivity : BaseMvpActivity<LoginPresenter>(), LoginView,  View.OnClic
     }
 
     override fun onLoginResult(userInfo: UserInfo) {
+        AppConfig.sAccountService.loginRx(User(userInfo.id, userInfo.userIcon,
+                userInfo.userName, userInfo.userGender, userInfo.userMobile,
+                userInfo.userSign)).execute(object : BaseSubscriber<Long>(){})
         startActivity<UserInfoActivity>()
+
     }
 
     override fun onClick(v: View) {

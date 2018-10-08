@@ -7,7 +7,7 @@ import android.os.Environment
 import android.os.PersistableBundle
 import android.support.v7.app.ActionBar
 import android.util.Log
-import com.doing.kotlin.baselib.common.BaseConstant
+import com.doing.kotlin.baselib.common.AppConfig
 import com.doing.kotlin.baselib.data.image.ImageUtils
 import com.doing.kotlin.baselib.ui.activity.BaseMvpActivity
 import com.doing.kotlin.baselib.utils.DateUtils
@@ -157,7 +157,7 @@ class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), TakePhoto.TakeRes
     override fun onGetUploadTokenResult(token: String) {
 
         mUploadManager.put(mUploadFile, null, token, { _, _, response ->
-            ImageUtils.setCircleUrl(mIvUserIcon, BaseConstant.IMAGE_SERVER_ADDRESS +
+            ImageUtils.setCircleUrl(mIvUserIcon, AppConfig.Constant.IMAGE_SERVER_ADDRESS +
                     response?.getString("hash"), R.drawable.icon_default_user)
         }, null)
     }

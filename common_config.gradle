@@ -20,12 +20,17 @@ ext {
     targetCompatibility = this.&getJavaVersion()
 
     version = [
-            supportLibrary : "27.1.1",
-            butterknife : "8.8.1",
-            okhttp: "3.10.0",
-            retrofit2: "2.4.0",
-            kotlin : "1.2.41",
-            anko : "0.10.5"
+            supportLibrary: "27.1.1",
+
+            butterknife   : "8.8.1",
+
+            okhttp        : "3.10.0",
+            retrofit2     : "2.4.0",
+
+            kotlin        : "1.2.41",
+            anko          : "0.10.5",
+
+            room          : "1.1.1"
     ]
 
     //常用dependencies
@@ -91,6 +96,9 @@ ext {
 
             // 数据库
             greendao               : "org.greenrobot:greendao:3.2.2",
+            room                   : "android.arch.persistence.room:runtime:${version.room}",
+            roomAnnotation         : "android.arch.persistence.room:compiler:${version.room}",
+            roomRxJava             : "android.arch.persistence.room:rxjava2:${version.room}",
 
             // 事件
             eventbus               : "org.greenrobot:eventbus:3.1.1",

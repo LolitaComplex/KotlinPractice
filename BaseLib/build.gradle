@@ -68,6 +68,11 @@ dependencies {
 
     api commonDependencies.takePhoto
     api commonDependencies.qiniuSave
+
+    api commonDependencies.room
+    api commonDependencies.roomRxJava
+    annotationProcessor commonDependencies.roomAnnotation
+    kapt commonDependencies.roomAnnotation
 }
 
 repositories {

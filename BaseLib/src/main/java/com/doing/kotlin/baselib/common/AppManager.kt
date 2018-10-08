@@ -5,11 +5,7 @@ import android.app.ActivityManager
 import android.content.Context
 import java.util.*
 
-class AppManager private constructor(){
-
-    companion object {
-        val sInstance: AppManager by lazy { AppManager() }
-    }
+class AppManager internal constructor(){
 
     private val mActivityStack = LinkedList<Activity>()
 

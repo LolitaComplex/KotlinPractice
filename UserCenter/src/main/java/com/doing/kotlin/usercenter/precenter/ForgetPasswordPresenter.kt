@@ -6,6 +6,7 @@ import com.doing.kotlin.baselib.presenter.BasePresenter
 import com.doing.kotlin.baselib.utils.ToastUtil
 import com.doing.kotlin.usercenter.precenter.view.ForgetPasswordView
 import com.doing.kotlin.usercenter.service.impl.UserService
+import io.reactivex.disposables.Disposable
 
 import javax.inject.Inject
 
@@ -21,6 +22,7 @@ class ForgetPasswordPresenter @Inject constructor() : BasePresenter<ForgetPasswo
     fun validate(mobile: String, verifyCode: String) {
         mUserService.forgetPwd(mobile, verifyCode)
                 .execute(object : BaseSubscriber<Boolean>(){
+
                     override fun onSuccess(data: Boolean) {
                         mView.onValidateResult()
                     }
