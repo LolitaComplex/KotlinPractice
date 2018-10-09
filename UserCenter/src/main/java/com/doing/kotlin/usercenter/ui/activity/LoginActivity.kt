@@ -1,19 +1,13 @@
 package com.doing.kotlin.usercenter.ui.activity
 
 import android.support.v7.app.ActionBar
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
-import com.doing.kotlin.baselib.common.AppConfig
-import com.doing.kotlin.baselib.data.db.User
-import com.doing.kotlin.baselib.data.rx.BaseSubscriber
-import com.doing.kotlin.baselib.ext.execute
 import com.doing.kotlin.baselib.ext.getTrimText
 import com.doing.kotlin.baselib.ext.setClickEnable
 import com.doing.kotlin.baselib.ui.activity.BaseMvpActivity
 import com.doing.kotlin.baselib.utils.ToastUtil
 import com.doing.kotlin.usercenter.R
-import com.doing.kotlin.usercenter.data.protocal.UserInfo
 import com.doing.kotlin.usercenter.injection.component.DaggerUserComponent
 import com.doing.kotlin.usercenter.injection.module.UserModule
 import com.doing.kotlin.usercenter.precenter.LoginPresenter
@@ -46,12 +40,9 @@ class LoginActivity : BaseMvpActivity<LoginPresenter>(), LoginView,  View.OnClic
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        item?.let {
-            when (it.itemId) {
-                R.id.menu_register -> startActivity<RegisterActivity>()
-            }
+        when (item?.itemId) {
+            R.id.menu_register -> startActivity<RegisterActivity>()
         }
-
         return super.onOptionsItemSelected(item)
     }
 

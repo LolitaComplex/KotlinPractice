@@ -20,6 +20,11 @@ abstract class BaseFragment : RxFragment() {
         initView()
     }
 
+
+    fun onBackPressed(): Boolean {
+        return false
+    }
+
     // ============== 模板方法 ==================
     @LayoutRes
     abstract fun getLayoutId(): Int

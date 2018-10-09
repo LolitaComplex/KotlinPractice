@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBar
 import android.view.Menu
 import com.doing.kotlin.baselib.common.AppConfig
 import com.doing.kotlin.baselib.common.AppManager
+import com.doing.kotlin.baselib.ui.fragment.BaseFragment
 import com.doing.kotlin.baselib.ui.widget.GeneralToolbar
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 
@@ -13,6 +14,9 @@ abstract class BaseActivity: RxAppCompatActivity(){
 
     // ============== 通用成员 ==================
     protected var mToolbar: GeneralToolbar? = null
+
+    var mCurrentFragment: BaseFragment? = null
+        private set
 
     protected val TAG: String by lazy {
         javaClass.simpleName
@@ -24,7 +28,6 @@ abstract class BaseActivity: RxAppCompatActivity(){
 
 
         setContentView(getLayoutId())
-        injection()
         initView()
 
         mToolbar?.let {
@@ -47,10 +50,17 @@ abstract class BaseActivity: RxAppCompatActivity(){
         return super.onCreateOptionsMenu(menu)
     }
 
+    override fun onBackPressed() {
+        mCurrentFragment?.let {
+            if (!it.onBackPressed()) {
+                super.onBackPressed()
+            }
+        }
+    }
+
     // ============== 模板方法 ==================
     @LayoutRes
     protected abstract fun getLayoutId(): Int
-    protected abstract fun injection()
     protected abstract fun initView()
 
     protected open fun initActionBar(actionBar: ActionBar) {}

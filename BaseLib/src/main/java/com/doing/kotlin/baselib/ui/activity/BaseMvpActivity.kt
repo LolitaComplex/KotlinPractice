@@ -38,6 +38,8 @@ abstract class BaseMvpActivity<T: BasePresenter<*>> : BaseActivity(), BaseView {
         mLoadProgressDialog = ProgressDialog.newInstance()
 
         super.onCreate(savedInstanceState)
+
+        injection()
     }
 
 
@@ -52,5 +54,8 @@ abstract class BaseMvpActivity<T: BasePresenter<*>> : BaseActivity(), BaseView {
 
     override fun onError() {}
 
+    // ============== 模板方法 ==================
+
+    protected abstract fun injection()
 
 }
