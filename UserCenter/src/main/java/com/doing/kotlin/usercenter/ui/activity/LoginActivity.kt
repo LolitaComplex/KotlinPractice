@@ -25,10 +25,6 @@ import org.jetbrains.anko.startActivity
 
 class LoginActivity : BaseMvpActivity<LoginPresenter>(), LoginView,  View.OnClickListener {
 
-    companion object {
-        private const val TAG = "LoginActivity"
-    }
-
     override fun getLayoutId(): Int {
         return R.layout.activity_login
     }
@@ -69,10 +65,7 @@ class LoginActivity : BaseMvpActivity<LoginPresenter>(), LoginView,  View.OnClic
         mPresenter.mView = this
     }
 
-    override fun onLoginResult(userInfo: UserInfo) {
-        AppConfig.sAccountService.loginRx(User(userInfo.id, userInfo.userIcon,
-                userInfo.userName, userInfo.userGender, userInfo.userMobile,
-                userInfo.userSign)).execute(object : BaseSubscriber<Long>(){})
+    override fun onLoginResult(data: Long) {
         startActivity<UserInfoActivity>()
 
     }

@@ -25,6 +25,10 @@ class AccountService internal constructor(){
         return mUser != null || mUserDao.get() != null
     }
 
+    fun update(user: User): Int {
+        return mUserDao.update(user)
+    }
+
     fun logout() {
         mUserDao.remove()
         mUser = null

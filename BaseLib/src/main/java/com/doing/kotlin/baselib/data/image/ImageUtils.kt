@@ -2,6 +2,7 @@ package com.doing.kotlin.baselib.data.image
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.text.TextUtils
 import android.util.SparseArray
 import android.widget.ImageView
 import com.bumptech.glide.load.Transformation
@@ -85,50 +86,51 @@ object ImageUtils {
         return transformation
     }
 
-    fun setUrl(imageView: ImageView, url: String) {
+    fun setUrl(imageView: ImageView, url: String?) {
         setUrl(imageView, url, 0, 0, null, 0)
     }
 
-    fun setUrl(imageView: ImageView, url: String, placeHolder: Int) {
+    fun setUrl(imageView: ImageView, url: String?, placeHolder: Int) {
         setUrl(imageView, url, 0, 0, null, placeHolder)
     }
 
-    fun setUrl(imageView: ImageView, url: String, width: Int, height: Int) {
+    fun setUrl(imageView: ImageView, url: String?, width: Int, height: Int) {
         setUrl(imageView, url, width, height, null, 0)
     }
 
-    fun setRadiusUrl(imageView: ImageView, url: String, radiusDp: Int) {
+    fun setRadiusUrl(imageView: ImageView, url: String?, radiusDp: Int) {
         val transformation = getRoundBitmapTransform(radiusDp)
         setUrl(imageView, url, 0, 0, transformation, 0)
     }
 
-    fun setRadiusUrl(imageView: ImageView, url: String, width: Int, height: Int, radiusDp: Int) {
+    fun setRadiusUrl(imageView: ImageView, url: String?, width: Int, height: Int, radiusDp: Int) {
         val transformation = getRoundBitmapTransform(radiusDp)
         setUrl(imageView, url, width, height, transformation, 0)
     }
 
-    fun setCircleUrl(imageView: ImageView, url: String) {
+    fun setCircleUrl(imageView: ImageView, url: String?) {
         val transformation = CircleCrop()
         setUrl(imageView, url, 0, 0, transformation, 0)
     }
 
-    fun setCircleUrl(imageView: ImageView, url: String, placeholderImg: Int) {
+    fun setCircleUrl(imageView: ImageView, url: String?, placeholderImg: Int) {
         val transformation = CircleCrop()
         setUrl(imageView, url, 0, 0, transformation, placeholderImg)
     }
 
-    fun setCircleUrl(imageView: ImageView, url: String, width: Int, height: Int) {
+    fun setCircleUrl(imageView: ImageView, url: String?, width: Int, height: Int) {
         val transformation = CircleCrop()
         setUrl(imageView, url, width, height, transformation, 0)
     }
 
-    private fun setUrl(imageView: ImageView, url: String, width: Int, height: Int, transformation: BitmapTransformation?, placeholderImg: Int) {
+    private fun setUrl(imageView: ImageView, url: String?, width: Int, height: Int, transformation: BitmapTransformation?, placeholderImg: Int) {
         var sizeUrl = if (width > 0 && height > 0)
             UrlGenerator.getImageUrl(url, width, height)
         else
             url
 
-        if (!sizeUrl.contains("http:")) {
+        if (!TextUtils.isEmpty(sizeUrl) &&
+                !sizeUrl!!.contains("http:")) {
             sizeUrl = "file://$sizeUrl"
         }
 

@@ -5,5 +5,5 @@ import com.doing.kotlin.usercenter.data.protocal.UserInfo
 
 interface LoginView : BaseView{
 
-    fun onLoginResult(userInfo: UserInfo)
+    fun onLoginResult(data: Long)
 }

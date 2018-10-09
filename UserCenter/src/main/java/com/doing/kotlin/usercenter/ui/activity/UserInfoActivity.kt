@@ -7,8 +7,10 @@ import android.os.Environment
 import android.os.PersistableBundle
 import android.support.v7.app.ActionBar
 import android.util.Log
+import android.view.MenuItem
 import com.doing.kotlin.baselib.common.AppConfig
 import com.doing.kotlin.baselib.data.image.ImageUtils
+import com.doing.kotlin.baselib.ext.getTrimText
 import com.doing.kotlin.baselib.ui.activity.BaseMvpActivity
 import com.doing.kotlin.baselib.utils.DateUtils
 import com.doing.kotlin.usercenter.R
@@ -37,14 +39,13 @@ import java.io.File
 class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), TakePhoto.TakeResultListener, InvokeListener
     , UserInfoView{
 
-    companion object {
-        const val TAG = "UserInfoActivity"
-    }
 
     private var mInvokeParam: InvokeParam? = null
 
+    // 选择完毕后初始化
     private var mUploadFile: String? = ""
-
+    // 上传完毕后初始化或者第一次进入时
+    private var mImageUrl: String? = ""
 
     private val mBottomDialog by lazy {
         SelectPictureDialog(this)
@@ -99,6 +100,9 @@ class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), TakePhoto.TakeRes
     override fun initView() {
         mToolbar = find(R.id.mToolbar)
 
+        initUserInfo()
+
+
         mRlUserIconView.setOnClickListener {
             mBottomDialog.show()
         }
@@ -112,6 +116,35 @@ class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), TakePhoto.TakeRes
             mTakePhoto.onEnableCompress(CompressConfig.ofDefaultConfig(), false)
             mTakePhoto.onPickFromGallery()
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.menu_register -> saveUserInfo()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun saveUserInfo() {
+        val userName = mEtUserName.getTrimText()
+        val gender = if (mRbGenderMale.isChecked) "0" else "1"
+        val sign = mEtUserSign.getTrimText()
+        mPresenter.editUser(mImageUrl, userName, gender, sign)
+    }
+
+    /**
+     * 把用户缓存数据绑定到View上
+     */
+    private fun initUserInfo() {
+        val userInfo = AppConfig.sAccountService.mUser
+        mImageUrl = userInfo?.userIcon
+        ImageUtils.setCircleUrl(mIvUserIcon, userInfo?.userIcon, R.drawable.icon_default_user)
+        mEtUserName.setText(userInfo?.userName)
+        val isFemale = userInfo?.userGender.equals("1")
+        mRbGenderMale.isChecked = isFemale
+        mRbGenderFemale.isChecked = !isFemale
+        mTvUserMobile.text = userInfo?.userMobile
+        mEtUserSign.setText(userInfo?.userSign)
     }
 
     private fun createTempFile(): File {
@@ -141,7 +174,7 @@ class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), TakePhoto.TakeRes
 
 
     override fun invoke(invokeParam: InvokeParam?): PermissionManager.TPermissionType {
-        val type = PermissionManager.checkPermission(TContextWrap.of(this), invokeParam?.getMethod()!!)
+        val type = PermissionManager.checkPermission(TContextWrap.of(this), invokeParam?.method!!)
         if (TPermissionType.WAIT == type) {
             this.mInvokeParam = invokeParam
         }
@@ -155,11 +188,15 @@ class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), TakePhoto.TakeRes
     }
 
     override fun onGetUploadTokenResult(token: String) {
-
         mUploadManager.put(mUploadFile, null, token, { _, _, response ->
-            ImageUtils.setCircleUrl(mIvUserIcon, AppConfig.Constant.IMAGE_SERVER_ADDRESS +
-                    response?.getString("hash"), R.drawable.icon_default_user)
+            mImageUrl = AppConfig.Constant.IMAGE_SERVER_ADDRESS + response?.getString("hash")
+            ImageUtils.setCircleUrl(mIvUserIcon,
+                    mImageUrl, R.drawable.icon_default_user)
         }, null)
+    }
+
+    override fun onEditUserResult() {
+        finish()
     }
 
 }

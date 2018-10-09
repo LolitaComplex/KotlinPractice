@@ -18,4 +18,7 @@ interface UserApi {
     @POST("userCenter/resetPwd")
     fun resetPwd(@Body body: ResetPasswordReq): Flowable<String>
 
+    @POST("userCenter/editUser")
+    fun editUser(@Body body: EditUserReq): Flowable<UserInfo>
+
 }

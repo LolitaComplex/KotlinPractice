@@ -12,4 +12,6 @@ interface UserService {
     fun forgetPwd(mobile: String, verifyCode: String): Flowable<Boolean>
 
     fun resetPwd(mobile: String, password: String): Flowable<Boolean>
+
+    fun editUser(userIcon: String?, userName: String, gender: String, sign: String): Flowable<UserInfo>
 }

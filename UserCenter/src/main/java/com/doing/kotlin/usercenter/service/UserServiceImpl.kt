@@ -8,6 +8,7 @@ import javax.inject.Inject
 
 class UserServiceImpl @Inject constructor(): UserService {
 
+
     override fun register(mobile: String, pwd: String, verifyCode: String): Flowable<Boolean> {
         return UserRepository.getUserApi().register(RegisterReq(mobile, pwd, verifyCode))
                 .flatMap { Flowable.just(true) }
@@ -25,6 +26,10 @@ class UserServiceImpl @Inject constructor(): UserService {
     override fun resetPwd(mobile: String, password: String): Flowable<Boolean> {
         return UserRepository.getUserApi().resetPwd(ResetPasswordReq(mobile, password))
                 .flatMap { Flowable.just(true) }
+    }
+
+    override fun editUser(userIcon: String?, userName: String, gender: String, sign: String): Flowable<UserInfo> {
+        return UserRepository.getUserApi().editUser(EditUserReq(userIcon, userName, gender, sign))
     }
 
 }

@@ -1,5 +1,7 @@
 package com.doing.kotlin.usercenter.precenter
 
+import com.doing.kotlin.baselib.common.AppConfig
+import com.doing.kotlin.baselib.data.db.User
 import com.doing.kotlin.baselib.data.rx.BaseSubscriber
 import com.doing.kotlin.baselib.ext.execute
 import com.doing.kotlin.baselib.ext.executeAndShowProgress
@@ -22,9 +24,15 @@ class LoginPresenter @Inject constructor() : BasePresenter<LoginView>() {
 
     fun login(mobile: String, pwd: String, pushId: String) {
         mUserService.login(mobile, pwd, pushId)
-                .executeAndShowProgress(object : BaseSubscriber<UserInfo>() {
+                .singleOrError()
+                .flatMap {
+                    AppConfig.sAccountService.loginRx(User(it.id, it.userIcon,
+                            it.userName, it.userGender, it.userMobile,
+                            it.userSign))
+                }
+                .executeAndShowProgress(object : BaseSubscriber<Long>() {
 
-                    override fun onSuccess(data: UserInfo) {
+                    override fun onSuccess(data: Long) {
                         mView.onLoginResult(data)
                     }
 
