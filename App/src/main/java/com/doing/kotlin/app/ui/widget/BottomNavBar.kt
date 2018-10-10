@@ -29,18 +29,24 @@ class BottomNavBar @JvmOverloads constructor(context: Context, attrs: AttributeS
                 R.drawable.btn_nav_cart_normal, "Cart")
 
         mCartRedPoint = TextBadgeItem()
+        mCartRedPoint.hide()
         cartItem.setBadgeItem(mCartRedPoint)
+
 
         // 消息
         val messageItem = initBottomNavItem(R.drawable.btn_nav_msg_press,
                 R.drawable.btn_nav_msg_normal, "Message")
 
         mMsgRedPoint = ShapeBadgeItem()
+        mMsgRedPoint.setShape(ShapeBadgeItem.SHAPE_OVAL)
+        mMsgRedPoint.hide()
         messageItem.setBadgeItem(mMsgRedPoint)
 
         // 个人中心
         val userItem = initBottomNavItem(R.drawable.btn_nav_user_press,
                 R.drawable.btn_nav_user_normal, "User")
+
+
 
 //        setMode(BottomNavigationBar.MODE_FIXED)
         setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC)
@@ -71,7 +77,7 @@ class BottomNavBar @JvmOverloads constructor(context: Context, attrs: AttributeS
         }
     }
 
-    fun showOrHiddenMsgRedPonint(visible: Boolean) {
+    fun showOrHiddenMsgRedPoint(visible: Boolean) {
         if (visible) {
             mMsgRedPoint.show()
         } else {

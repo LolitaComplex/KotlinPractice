@@ -35,6 +35,8 @@ abstract class BaseMvpFragment<T : BasePresenter<*>> : BaseFragment(), BaseView 
                 .build()
 
         mLoadProgressDialog = ProgressDialog.newInstance()
+
+        injection()
     }
 
 
@@ -47,4 +49,9 @@ abstract class BaseMvpFragment<T : BasePresenter<*>> : BaseFragment(), BaseView 
     }
 
     override fun onError() {}
+
+    // ============== 模板方法 ==================
+
+    protected abstract fun injection()
+
 }

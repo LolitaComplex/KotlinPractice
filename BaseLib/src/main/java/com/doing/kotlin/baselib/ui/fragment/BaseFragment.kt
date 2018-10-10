@@ -16,7 +16,6 @@ abstract class BaseFragment : RxFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        injection()
         initView()
     }
 
@@ -28,6 +27,5 @@ abstract class BaseFragment : RxFragment() {
     // ============== 模板方法 ==================
     @LayoutRes
     abstract fun getLayoutId(): Int
-    protected abstract fun injection()
     protected abstract fun initView()
 }

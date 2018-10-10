@@ -36,10 +36,9 @@ abstract class BaseMvpActivity<T: BasePresenter<*>> : BaseActivity(), BaseView {
                 .build()
 
         mLoadProgressDialog = ProgressDialog.newInstance()
+        injection()
 
         super.onCreate(savedInstanceState)
-
-        injection()
     }
 
 
