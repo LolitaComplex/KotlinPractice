@@ -129,8 +129,9 @@ object ImageUtils {
         else
             url
 
+
         if (!TextUtils.isEmpty(sizeUrl) &&
-                !sizeUrl!!.contains("http:")) {
+                !sizeUrl!!.contains("http")) {
             sizeUrl = "file://$sizeUrl"
         }
 

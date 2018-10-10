@@ -108,7 +108,8 @@ ext {
             umengAnalytic          : "com.umeng.analytics:analytics:latest.integration",
 
             // 常用组件系列
-            bnner                  : "com.youth.banner:banner:1.4.9",
+            banner                  : "com.youth.banner:banner:1.4.10",
+
             bottomNavigationBar    : "com.ashokvarma.android:bottom-navigation-bar:2.0.5",
 
             // 6.0权限

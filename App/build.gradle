@@ -50,6 +50,7 @@ dependencies {
         implementation project(':UserCenter')
     }
 
+    api commonDependencies.banner
     api commonDependencies.bottomNavigationBar
 }
 repositories {

@@ -30,8 +30,7 @@ class LoginPresenter @Inject constructor() : BasePresenter<LoginView>() {
                             it.userName, it.userGender, it.userMobile,
                             it.userSign))
                 }
-                .executeAndShowProgress(object : BaseSubscriber<Long>() {
-
+                .executeAndShowProgress(object: BaseSubscriber<Long>(){
                     override fun onSuccess(data: Long) {
                         mView.onLoginResult(data)
                     }
@@ -45,4 +44,6 @@ class LoginPresenter @Inject constructor() : BasePresenter<LoginView>() {
                     }
                 }, mProvider, mView)
     }
+
+
 }

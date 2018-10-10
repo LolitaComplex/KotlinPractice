@@ -44,5 +44,13 @@ class MainActivity : BaseActivity() {
                     mBottomNavigation.showOrHiddenMsgRedPoint(true)
                 }
 
+        Flowable.timer(10, TimeUnit.SECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    mBottomNavigation.setCartItemCount(0)
+                    mBottomNavigation.showOrHiddenMsgRedPoint(false)
+                }
+
+
     }
 }
