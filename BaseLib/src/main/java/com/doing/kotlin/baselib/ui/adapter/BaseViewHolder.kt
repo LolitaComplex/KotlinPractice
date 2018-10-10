@@ -37,7 +37,7 @@ class BaseViewHolder private constructor(private val mContext: Context, private 
         }
     }
 
-    private inline fun <reified T : View> getView(viewId: Int): T? {
+     fun <T : View> getView(viewId: Int): T? {
         var view: View? = mViews.get(viewId)
         if (view == null) {
             view = contentView.findViewById(viewId)

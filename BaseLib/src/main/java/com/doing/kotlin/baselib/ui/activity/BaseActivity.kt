@@ -1,5 +1,6 @@
 package com.doing.kotlin.baselib.ui.activity
 
+import android.content.Context
 import android.os.Bundle
 import android.support.annotation.LayoutRes
 import android.support.v7.app.ActionBar
@@ -14,7 +15,7 @@ abstract class BaseActivity: RxAppCompatActivity(){
 
     // ============== 通用成员 ==================
     protected var mToolbar: GeneralToolbar? = null
-
+    protected lateinit var mContext: Context
     var mCurrentFragment: BaseFragment? = null
         private set
 
@@ -25,7 +26,7 @@ abstract class BaseActivity: RxAppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         AppConfig.sActivityManager.addActivity(this)
-
+        mContext = this
 
         setContentView(getLayoutId())
         initView()

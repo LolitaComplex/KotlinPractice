@@ -53,7 +53,7 @@ class GeneralToolbar constructor(context: Context, attrs:  AttributeSet?, defSty
      * 添加标题栏
      */
     private fun initTitleText(text: String, textGravity: Int, textSize: Float, textColor: ColorStateList) {
-        textView {
+        this.textView {
             val params = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
             params.gravity = textGravity
             layoutParams = params

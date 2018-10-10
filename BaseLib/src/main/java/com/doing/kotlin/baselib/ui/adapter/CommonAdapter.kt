@@ -31,5 +31,5 @@ abstract class CommonAdapter<T>(context: Context, protected var mLayoutId: Int, 
 
     }
 
-    abstract override fun convert(holder: BaseViewHolder, t: T, position: Int)
+    abstract override fun convert(holder: BaseViewHolder, data: T, position: Int)
 }

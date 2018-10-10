@@ -22,9 +22,6 @@ abstract class BaseMvpActivity<T: BasePresenter<*>> : BaseActivity(), BaseView {
     protected lateinit var mActivityComponent: ActivityComponent
     @Inject
     protected lateinit var mPresenter: T
-    @Inject
-    protected lateinit var mContext: Context
-
 
     private lateinit var mLoadProgressDialog: ProgressDialog
 
