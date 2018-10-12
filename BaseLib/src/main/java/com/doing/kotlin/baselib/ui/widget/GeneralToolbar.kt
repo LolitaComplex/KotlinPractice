@@ -10,9 +10,9 @@ import android.view.Gravity
 import android.widget.TextView
 import com.doing.kotlin.baselib.R
 import com.doing.kotlin.baselib.utils.DensityUtils
-import com.doing.kotlin.baselib.utils.ToastUtil
 import org.jetbrains.anko.singleLine
 import org.jetbrains.anko.textView
+import org.jetbrains.anko.wrapContent
 
 class GeneralToolbar constructor(context: Context, attrs:  AttributeSet?, defStyleAttr: Int):
         Toolbar(context, attrs, defStyleAttr) {
@@ -54,7 +54,7 @@ class GeneralToolbar constructor(context: Context, attrs:  AttributeSet?, defSty
      */
     private fun initTitleText(text: String, textGravity: Int, textSize: Float, textColor: ColorStateList) {
         this.textView {
-            val params = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
+            val params = LayoutParams(wrapContent, wrapContent)
             params.gravity = textGravity
             layoutParams = params
 

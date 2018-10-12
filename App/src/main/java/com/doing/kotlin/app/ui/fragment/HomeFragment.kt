@@ -19,7 +19,6 @@ import com.youth.banner.loader.ImageLoader
 import kotlinx.android.synthetic.main.fragment_home.*
 import me.crosswall.lib.coverflow.CoverFlow
 import org.jetbrains.anko.find
-import org.jetbrains.anko.matchParent
 
 class HomeFragment : BaseFragment() {
 
@@ -97,6 +96,8 @@ class HomeFragment : BaseFragment() {
                 return data.size
             }
         }
+
+
         mTopicPager.currentItem = 0
         mTopicPager.offscreenPageLimit = 5
 

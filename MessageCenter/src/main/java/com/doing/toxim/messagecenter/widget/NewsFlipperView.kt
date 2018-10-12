@@ -28,7 +28,7 @@ class NewsFlipperView @JvmOverloads constructor(context: Context, attrs: Attribu
         return {
             this.text = content
             this.textSize = px2sp(dimen(R.dimen.text_small_size))
-            this.layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
+            this.layoutParams = LayoutParams(matchParent, wrapContent)
         }
     }
 
