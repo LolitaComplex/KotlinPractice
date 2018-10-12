@@ -10,15 +10,11 @@ import android.view.ViewGroup
  */
 open class MultiItemTypeAdapter<T>(mContext: Context, data: MutableList<T>) : BaseAdapter<T>(mContext, data) {
 
-    protected var mDelegateManager: ItemViewDelegateManager<T>
-    protected var mOnItemClickListener: OnItemClickListener? = null
+    private var mDelegateManager: ItemViewDelegateManager<T> = ItemViewDelegateManager()
+    private var mOnItemClickListener: OnItemClickListener? = null
 
-    protected val isUseItemViewDelegateManager: Boolean
+    private val isUseItemViewDelegateManager: Boolean
         get() = mDelegateManager.itemViewDelegateCount > 0
-
-    init {
-        mDelegateManager = ItemViewDelegateManager()
-    }
 
     override fun getItemViewType(position: Int): Int {
         return if (!isUseItemViewDelegateManager) {
@@ -44,8 +40,8 @@ open class MultiItemTypeAdapter<T>(mContext: Context, data: MutableList<T>) : Ba
         return mListData.size
     }
 
-    protected open fun convert(holder: BaseViewHolder, t: T, position: Int) {
-        mDelegateManager.convert(holder, t, position)
+    protected open fun convert(holder: BaseViewHolder, data: T, position: Int) {
+        mDelegateManager.convert(holder, data, position)
     }
 
     fun addItemViewDelegate(itemViewDelegate: ItemViewDelegate<T>): MultiItemTypeAdapter<T> {
@@ -58,9 +54,7 @@ open class MultiItemTypeAdapter<T>(mContext: Context, data: MutableList<T>) : Ba
         return this
     }
 
-    protected fun onViewHolderCreate(holder: BaseViewHolder) {
-
-    }
+    protected fun onViewHolderCreate(holder: BaseViewHolder) = Unit
 
     protected fun setListener(parent: ViewGroup, holder: BaseViewHolder, viewType: Int) {
         if (!isEnable(viewType)) {
@@ -100,12 +94,8 @@ open class MultiItemTypeAdapter<T>(mContext: Context, data: MutableList<T>) : Ba
 
     class SimpleOnItemClickListener : OnItemClickListener {
 
-        override fun onItemClick(view: View, holder: BaseViewHolder, position: Int) {
+        override fun onItemClick(view: View, holder: BaseViewHolder, position: Int) = Unit
 
-        }
-
-        override fun onItemLongClick(view: View, holder: BaseViewHolder, position: Int) {
-
-        }
+        override fun onItemLongClick(view: View, holder: BaseViewHolder, position: Int) = Unit
     }
 }

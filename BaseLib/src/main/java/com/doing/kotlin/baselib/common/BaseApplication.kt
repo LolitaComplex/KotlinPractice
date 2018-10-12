@@ -17,13 +17,11 @@ class BaseApplication : Application() {
         mAppComponent = DaggerAppComponent.builder()
                 .appModule(AppModule(this))
                 .build()
-
     }
 
     companion object {
 
         @SuppressLint("StaticFieldLeak")
         lateinit var mContext: Context
-
     }
 }

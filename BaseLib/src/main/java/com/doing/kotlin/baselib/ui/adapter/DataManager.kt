@@ -16,8 +16,9 @@ class DataManager<in T>(private val mAdapter: BaseAdapter<T>, private val mListD
     }
 
     fun addItems(position: Int, data: List<T>, headerCount: Int) {
+
+            mAdapter.notifyItemRangeInserted(headerCount + position, data.size)
         mListData.addAll(position, data)
-        mAdapter.notifyItemRangeInserted(headerCount + position, data.size)
     }
 
 

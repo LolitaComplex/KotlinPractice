@@ -12,7 +12,6 @@ abstract class CommonAdapter<T>(context: Context, protected var mLayoutId: Int, 
     var isEnable = true
 
     init {
-
         addItemViewDelegate(object : ItemViewDelegate<T> {
             override val mItemViewLayoutId: Int
                 get() = mLayoutId
@@ -28,7 +27,6 @@ abstract class CommonAdapter<T>(context: Context, protected var mLayoutId: Int, 
                 this@CommonAdapter.convert(holder, t, position)
             }
         })
-
     }
 
     abstract override fun convert(holder: BaseViewHolder, data: T, position: Int)
